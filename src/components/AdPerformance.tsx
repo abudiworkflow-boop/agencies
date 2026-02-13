@@ -2,159 +2,156 @@
 
 import { motion } from "framer-motion";
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
+  ResponsiveContainer, AreaChart, Area,
 } from "recharts";
 import { DollarSign, MousePointer, Eye, Target } from "lucide-react";
 
 const weeklyData = [
-  { day: "Mon", metaSpend: 120, googleSpend: 85, leads: 12 },
-  { day: "Tue", metaSpend: 135, googleSpend: 90, leads: 15 },
-  { day: "Wed", metaSpend: 110, googleSpend: 95, leads: 11 },
-  { day: "Thu", metaSpend: 145, googleSpend: 80, leads: 18 },
-  { day: "Fri", metaSpend: 160, googleSpend: 100, leads: 22 },
-  { day: "Sat", metaSpend: 90, googleSpend: 60, leads: 8 },
-  { day: "Sun", metaSpend: 80, googleSpend: 50, leads: 7 },
+  { day: "Mon", meta: 120, google: 85, leads: 12 },
+  { day: "Tue", meta: 135, google: 90, leads: 15 },
+  { day: "Wed", meta: 110, google: 95, leads: 11 },
+  { day: "Thu", meta: 145, google: 80, leads: 18 },
+  { day: "Fri", meta: 160, google: 100, leads: 22 },
+  { day: "Sat", meta: 90, google: 60, leads: 8 },
+  { day: "Sun", meta: 80, google: 50, leads: 7 },
 ];
 
-const channelBreakdown = [
-  { name: "Meta Ads", value: 45, color: "#3b82f6" },
-  { name: "Google Ads", value: 30, color: "#10b981" },
-  { name: "Instagram Organic", value: 15, color: "#ec4899" },
-  { name: "Website Direct", value: 10, color: "#8b5cf6" },
+const conversionData = [
+  { day: "Week 1", rate: 12 },
+  { day: "Week 2", rate: 18 },
+  { day: "Week 3", rate: 22 },
+  { day: "Week 4", rate: 28 },
+  { day: "Week 5", rate: 31 },
+  { day: "Week 6", rate: 35 },
+  { day: "Week 7", rate: 38 },
+  { day: "Week 8", rate: 42 },
 ];
 
-const adMetrics = [
-  { label: "Total Ad Spend", value: "$4,280", icon: DollarSign, color: "text-green-400", bg: "bg-green-400/10" },
-  { label: "Total Clicks", value: "8,492", icon: MousePointer, color: "text-blue-400", bg: "bg-blue-400/10" },
-  { label: "Impressions", value: "142K", icon: Eye, color: "text-purple-400", bg: "bg-purple-400/10" },
-  { label: "Cost Per Lead", value: "$12.40", icon: Target, color: "text-yellow-400", bg: "bg-yellow-400/10" },
+const metrics = [
+  { label: "Ad Spend", value: "$4,280", sub: "This month", icon: DollarSign, gradient: "from-emerald-500 to-teal-600" },
+  { label: "Total Clicks", value: "8,492", sub: "+24% vs last month", icon: MousePointer, gradient: "from-indigo-500 to-blue-600" },
+  { label: "Impressions", value: "142K", sub: "Across all platforms", icon: Eye, gradient: "from-purple-500 to-pink-600" },
+  { label: "Cost Per Lead", value: "$12.40", sub: "-18% improvement", icon: Target, gradient: "from-amber-500 to-orange-600" },
 ];
+
+const tooltipStyle = {
+  backgroundColor: "rgba(15, 15, 35, 0.95)",
+  border: "1px solid rgba(255,255,255,0.06)",
+  borderRadius: "12px",
+  fontSize: "12px",
+  padding: "10px 14px",
+  boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
+};
 
 export default function AdPerformance() {
   return (
-    <section className="py-24 px-6 relative">
-      <div className="max-w-7xl mx-auto">
+    <section id="analytics" className="py-32 px-6 relative">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_right,_rgba(99,102,241,0.04)_0%,_transparent_50%)]" />
+
+      <div className="max-w-7xl mx-auto relative">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold mb-4">
-            Ad Performance{" "}
-            <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-              Tracking
-            </span>
+          <span className="text-xs font-semibold text-amber-400 uppercase tracking-[0.2em] mb-4 block">
+            Analytics
+          </span>
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-5">
+            Ad Performance <span className="gradient-text-blue">Tracking</span>
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Meta Ads & Google Ads data pulled automatically — cost, clicks, conversions all in one place
+          <p className="text-gray-500 text-lg max-w-xl mx-auto">
+            Meta Ads & Google Ads data pulled automatically — every dollar tracked
           </p>
         </motion.div>
 
-        {/* Ad metrics */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          {adMetrics.map((metric, i) => (
+        {/* Metrics */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {metrics.map((m, i) => (
             <motion.div
-              key={metric.label}
+              key={m.label}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="p-5 rounded-xl bg-[#111827] border border-white/5"
+              transition={{ delay: i * 0.08 }}
+              className="stat-card glass-card-sm p-6"
             >
-              <div className={`w-10 h-10 rounded-lg ${metric.bg} flex items-center justify-center mb-3`}>
-                <metric.icon className={`w-5 h-5 ${metric.color}`} />
+              <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${m.gradient} flex items-center justify-center shadow-lg mb-4`}>
+                <m.icon className="w-5 h-5 text-white" />
               </div>
-              <div className="text-2xl font-bold">{metric.value}</div>
-              <div className="text-sm text-gray-500 mt-1">{metric.label}</div>
+              <div className="text-2xl font-bold tracking-tight mb-0.5">{m.value}</div>
+              <div className="text-xs text-gray-500">{m.label}</div>
+              <div className="text-[10px] text-gray-600 mt-1">{m.sub}</div>
             </motion.div>
           ))}
         </div>
 
         {/* Charts */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
           {/* Bar chart */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="col-span-2 p-6 rounded-xl bg-[#111827] border border-white/5"
+            className="lg:col-span-3 glass-card p-6"
           >
-            <h3 className="font-semibold mb-6">Weekly Ad Spend & Leads</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={weeklyData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1f2937" />
-                <XAxis dataKey="day" stroke="#6b7280" fontSize={12} />
-                <YAxis stroke="#6b7280" fontSize={12} />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#1f2937",
-                    border: "1px solid #374151",
-                    borderRadius: "8px",
-                    fontSize: "12px",
-                  }}
-                />
-                <Bar dataKey="metaSpend" name="Meta Ads ($)" fill="#3b82f6" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="googleSpend" name="Google Ads ($)" fill="#10b981" radius={[4, 4, 0, 0]} />
-                <Bar dataKey="leads" name="Leads" fill="#8b5cf6" radius={[4, 4, 0, 0]} />
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h3 className="text-sm font-semibold">Weekly Ad Spend</h3>
+                <p className="text-[11px] text-gray-500 mt-0.5">Meta vs Google breakdown</p>
+              </div>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-sm bg-indigo-500" />
+                  <span className="text-[10px] text-gray-400">Meta</span>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <div className="w-2.5 h-2.5 rounded-sm bg-emerald-500" />
+                  <span className="text-[10px] text-gray-400">Google</span>
+                </div>
+              </div>
+            </div>
+            <ResponsiveContainer width="100%" height={280}>
+              <BarChart data={weeklyData} barGap={4}>
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.03)" />
+                <XAxis dataKey="day" stroke="#4b5563" fontSize={11} tickLine={false} axisLine={false} />
+                <YAxis stroke="#4b5563" fontSize={11} tickLine={false} axisLine={false} tickFormatter={(v) => `$${v}`} />
+                <Tooltip contentStyle={tooltipStyle} cursor={{ fill: "rgba(255,255,255,0.02)" }} />
+                <Bar dataKey="meta" name="Meta Ads" fill="#6366f1" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="google" name="Google Ads" fill="#10b981" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </motion.div>
 
-          {/* Pie chart */}
+          {/* Conversion trend */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.2 }}
-            className="p-6 rounded-xl bg-[#111827] border border-white/5"
+            transition={{ delay: 0.15 }}
+            className="lg:col-span-2 glass-card p-6"
           >
-            <h3 className="font-semibold mb-6">Lead Sources</h3>
-            <ResponsiveContainer width="100%" height={200}>
-              <PieChart>
-                <Pie
-                  data={channelBreakdown}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={50}
-                  outerRadius={80}
-                  paddingAngle={4}
-                  dataKey="value"
-                >
-                  {channelBreakdown.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: "#1f2937",
-                    border: "1px solid #374151",
-                    borderRadius: "8px",
-                    fontSize: "12px",
-                  }}
-                />
-              </PieChart>
-            </ResponsiveContainer>
-            <div className="space-y-2 mt-4">
-              {channelBreakdown.map((item) => (
-                <div key={item.name} className="flex items-center justify-between text-sm">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full" style={{ backgroundColor: item.color }} />
-                    <span className="text-gray-300">{item.name}</span>
-                  </div>
-                  <span className="text-gray-500">{item.value}%</span>
-                </div>
-              ))}
+            <div className="mb-6">
+              <h3 className="text-sm font-semibold">Conversion Rate</h3>
+              <p className="text-[11px] text-gray-500 mt-0.5">Trending upward</p>
             </div>
+            <ResponsiveContainer width="100%" height={280}>
+              <AreaChart data={conversionData}>
+                <defs>
+                  <linearGradient id="convGrad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#6366f1" stopOpacity={0.3} />
+                    <stop offset="100%" stopColor="#6366f1" stopOpacity={0} />
+                  </linearGradient>
+                </defs>
+                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.03)" />
+                <XAxis dataKey="day" stroke="#4b5563" fontSize={10} tickLine={false} axisLine={false} />
+                <YAxis stroke="#4b5563" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(v) => `${v}%`} />
+                <Tooltip contentStyle={tooltipStyle} />
+                <Area type="monotone" dataKey="rate" name="Conv. Rate" stroke="#6366f1" strokeWidth={2} fill="url(#convGrad)" />
+              </AreaChart>
+            </ResponsiveContainer>
           </motion.div>
         </div>
       </div>

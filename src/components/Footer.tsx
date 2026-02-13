@@ -1,42 +1,54 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Bot, Zap } from "lucide-react";
+import { Bot, ArrowRight, Zap } from "lucide-react";
 
 export default function Footer() {
   return (
-    <footer className="py-16 px-6 border-t border-white/5">
-      <div className="max-w-7xl mx-auto">
+    <footer id="contact" className="relative">
+      {/* CTA section */}
+      <section className="py-32 px-6 relative">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.08)_0%,_transparent_50%)]" />
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-12"
+          className="max-w-3xl mx-auto text-center relative"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Ready to{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Automate
-            </span>
-            ?
+          <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center mx-auto mb-8 shadow-xl shadow-indigo-500/25">
+            <Bot className="w-8 h-8 text-white" />
+          </div>
+          <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
+            Ready to <span className="gradient-text">Automate</span>?
           </h2>
-          <p className="text-gray-400 text-lg max-w-xl mx-auto mb-8">
-            Let&apos;s set up your AI automation system and start converting more leads today.
+          <p className="text-gray-400 text-lg max-w-lg mx-auto mb-10">
+            Set up your AI automation system and start converting more leads — without hiring additional staff.
           </p>
-          <button className="px-8 py-4 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold text-lg transition-all duration-300 shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40">
-            Get Started Now
-          </button>
+          <a
+            href="#"
+            className="group inline-flex items-center gap-3 px-10 py-5 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 hover:from-indigo-600 hover:to-purple-700 text-white font-semibold text-lg shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-500"
+          >
+            Get Started
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+          </a>
         </motion.div>
+      </section>
 
-        <div className="flex items-center justify-between pt-8 border-t border-white/5">
-          <div className="flex items-center gap-2">
-            <Bot className="w-5 h-5 text-blue-400" />
-            <span className="text-sm text-gray-500">AI Automation System</span>
+      {/* Divider */}
+      <div className="section-divider" />
+
+      {/* Bottom bar */}
+      <div className="max-w-7xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center">
+            <Bot className="w-4 h-4 text-white" />
           </div>
-          <div className="flex items-center gap-1 text-xs text-gray-600">
-            <Zap className="w-3 h-3" />
-            Powered by n8n + OpenAI
-          </div>
+          <span className="text-sm text-gray-500">AI Automation System</span>
+        </div>
+        <div className="flex items-center gap-1.5 text-xs text-gray-600">
+          <Zap className="w-3 h-3 text-indigo-400/50" />
+          Powered by n8n + OpenAI
         </div>
       </div>
     </footer>

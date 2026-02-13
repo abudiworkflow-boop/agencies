@@ -1,83 +1,154 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Bot, Zap, TrendingUp } from "lucide-react";
+import { Bot, Zap, TrendingUp, MessageSquare, Shield, ChevronDown } from "lucide-react";
+
+const floatingIcons = [
+  { icon: MessageSquare, x: "10%", y: "20%", delay: 0, color: "text-green-400/30" },
+  { icon: Bot, x: "85%", y: "15%", delay: 1, color: "text-indigo-400/30" },
+  { icon: TrendingUp, x: "75%", y: "70%", delay: 2, color: "text-cyan-400/30" },
+  { icon: Shield, x: "15%", y: "75%", delay: 0.5, color: "text-purple-400/30" },
+];
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#0a0a0a] via-[#0f1629] to-[#0a0a0a]" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl" />
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* Background layers */}
+      <div className="absolute inset-0">
+        {/* Main gradient */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.08)_0%,_transparent_70%)]" />
+        {/* Top-right orb */}
+        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] bg-indigo-500/[0.07] rounded-full blur-[120px]" />
+        {/* Bottom-left orb */}
+        <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] bg-purple-500/[0.06] rounded-full blur-[120px]" />
+        {/* Center glow */}
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-indigo-500/[0.04] rounded-full blur-[100px]" />
+        {/* Grid pattern */}
+        <div
+          className="absolute inset-0 opacity-[0.03]"
+          style={{
+            backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
+            backgroundSize: "60px 60px",
+          }}
+        />
+      </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+      {/* Floating icons */}
+      {floatingIcons.map((item, i) => (
+        <motion.div
+          key={i}
+          className={`absolute ${item.color} hidden md:block`}
+          style={{ left: item.x, top: item.y }}
+          animate={{ y: [0, -15, 0], rotate: [0, 5, -5, 0] }}
+          transition={{ duration: 6, repeat: Infinity, delay: item.delay, ease: "easeInOut" }}
+        >
+          <item.icon className="w-8 h-8" />
+        </motion.div>
+      ))}
+
+      <div className="relative z-10 max-w-5xl mx-auto px-6 text-center">
+        {/* Badge */}
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.9 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-indigo-500/[0.08] border border-indigo-500/20 text-indigo-300 text-sm mb-10"
+        >
+          <span className="relative flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75" />
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-400" />
+          </span>
+          AI-Powered Automation System
+        </motion.div>
+
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[1.05] tracking-tight mb-8"
+        >
+          Turn Every
+          <br />
+          <span className="gradient-text">Inquiry</span> Into
+          <br />
+          Revenue
+        </motion.h1>
+
+        {/* Subheadline */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+          className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-14 leading-relaxed"
+        >
+          Capture leads from every channel. Respond instantly, 24/7.
+          Qualify, track, and convert — all on autopilot.
+        </motion.p>
+
+        {/* Stats row */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.8, delay: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-wrap justify-center gap-x-12 gap-y-6 mb-16"
         >
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 text-sm mb-8">
-            <Zap className="w-4 h-4" />
-            AI-Powered Automation System
-          </div>
-
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Turn Every{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Inquiry
-            </span>{" "}
-            Into a{" "}
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Client
-            </span>
-          </h1>
-
-          <p className="text-lg md:text-xl text-gray-400 max-w-3xl mx-auto mb-12">
-            A fully automated AI system that captures leads from every channel,
-            responds instantly 24/7, qualifies prospects, and tracks your ad
-            performance — without hiring additional staff.
-          </p>
-
-          <div className="flex flex-wrap justify-center gap-6 mb-16">
-            {[
-              { icon: Bot, label: "24/7 AI Support", desc: "Never miss a lead" },
-              { icon: Zap, label: "Instant Response", desc: "Under 3 seconds" },
-              { icon: TrendingUp, label: "Smart Tracking", desc: "Every metric tracked" },
-            ].map((item, i) => (
-              <motion.div
-                key={item.label}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.3 + i * 0.15 }}
-                className="flex items-center gap-3 px-6 py-3 rounded-xl bg-white/5 border border-white/10"
-              >
-                <item.icon className="w-5 h-5 text-blue-400" />
-                <div className="text-left">
-                  <div className="text-sm font-semibold">{item.label}</div>
-                  <div className="text-xs text-gray-500">{item.desc}</div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          {[
+            { value: "<3s", label: "Response Time", icon: Zap },
+            { value: "24/7", label: "Availability", icon: Bot },
+            { value: "4x", label: "More Conversions", icon: TrendingUp },
+          ].map((stat) => (
+            <div key={stat.label} className="flex items-center gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-white/[0.04] border border-white/[0.06] flex items-center justify-center">
+                <stat.icon className="w-5 h-5 text-indigo-400" />
+              </div>
+              <div className="text-left">
+                <div className="text-2xl font-bold tracking-tight">{stat.value}</div>
+                <div className="text-xs text-gray-500 uppercase tracking-wider">{stat.label}</div>
+              </div>
+            </div>
+          ))}
         </motion.div>
 
-        {/* Scroll indicator */}
+        {/* CTA buttons */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-wrap justify-center gap-4"
         >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-6 h-10 rounded-full border-2 border-white/20 flex items-start justify-center p-2"
+          <a
+            href="#chat-demo"
+            className="group relative px-8 py-4 rounded-2xl bg-gradient-to-r from-indigo-500 to-purple-600 text-white font-semibold text-lg shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/40 transition-all duration-500 overflow-hidden"
           >
-            <div className="w-1.5 h-1.5 rounded-full bg-white/40" />
-          </motion.div>
+            <span className="relative z-10">See Live Demo</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          </a>
+          <a
+            href="#system-flow"
+            className="px-8 py-4 rounded-2xl text-gray-300 font-semibold text-lg border border-white/10 hover:border-white/20 hover:bg-white/[0.03] transition-all duration-300"
+          >
+            How It Works
+          </a>
         </motion.div>
       </div>
+
+      {/* Scroll indicator */}
+      <motion.a
+        href="#system-flow"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 2 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+      >
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+        >
+          <ChevronDown className="w-6 h-6 text-gray-600" />
+        </motion.div>
+      </motion.a>
     </section>
   );
 }
