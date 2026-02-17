@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Zap } from "lucide-react";
 
 const links = [
   { label: "Features", href: "#features" },
@@ -16,76 +16,90 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const h = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", h);
-    return () => window.removeEventListener("scroll", h);
+    const onScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   return (
-    <>
-      <nav
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-black/80 backdrop-blur-md border-b border-[#1A1A1A]" : ""
-        }`}
-      >
-        <div className="max-w-[1200px] mx-auto px-6 h-14 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2">
-            <div className="w-7 h-7 rounded-md bg-[#2563EB] flex items-center justify-center">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-              </svg>
-            </div>
-            <span className="text-[14px] font-semibold tracking-tight">AutomateAI</span>
-          </a>
-
-          <div className="hidden md:flex items-center gap-6">
-            {links.map((l) => (
-              <a key={l.href} href={l.href} className="text-[13px] text-[#525252] hover:text-white transition-colors">
-                {l.label}
-              </a>
-            ))}
-            <a
-              href="#cta"
-              className="text-[13px] font-medium text-white bg-[#2563EB] hover:bg-[#1D4ED8] px-4 py-1.5 rounded-lg transition-colors"
-            >
-              Get Started
-            </a>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? "bg-black/90 backdrop-blur-xl border-b border-white/[0.06]"
+          : "bg-transparent"
+      }`}
+    >
+      <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+        {/* Logo */}
+        <a href="#" className="flex items-center gap-2.5">
+          <div className="w-8 h-8 rounded-lg bg-[#2563EB] flex items-center justify-center">
+            <Zap size={16} className="text-white fill-white" />
           </div>
+          <span className="text-[15px] font-semibold text-white">AutomateAI</span>
+        </a>
 
-          <button onClick={() => setOpen(!open)} className="md:hidden text-[#A3A3A3]">
-            {open ? <X size={20} /> : <Menu size={20} />}
-          </button>
+        {/* Desktop links */}
+        <div className="hidden md:flex items-center gap-8">
+          {links.map((l) => (
+            <a
+              key={l.href}
+              href={l.href}
+              className="text-[13px] text-[#737373] hover:text-white transition-colors"
+            >
+              {l.label}
+            </a>
+          ))}
         </div>
-      </nav>
 
+        {/* CTA */}
+        <div className="hidden md:flex items-center gap-3">
+          <a
+            href="#cta"
+            className="text-[13px] font-medium text-black bg-white hover:bg-neutral-200 px-4 py-2 rounded-lg transition-colors"
+          >
+            Get Started
+          </a>
+        </div>
+
+        {/* Mobile toggle */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="md:hidden text-white p-1"
+        >
+          {open ? <X size={20} /> : <Menu size={20} />}
+        </button>
+      </div>
+
+      {/* Mobile menu */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 bg-black/95 pt-16 px-6 flex flex-col gap-2"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden bg-black/95 backdrop-blur-xl border-b border-white/[0.06]"
           >
-            {links.map((l) => (
+            <div className="px-6 py-4 space-y-3">
+              {links.map((l) => (
+                <a
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="block text-[14px] text-[#A3A3A3] hover:text-white py-1"
+                >
+                  {l.label}
+                </a>
+              ))}
               <a
-                key={l.href}
-                href={l.href}
-                onClick={() => setOpen(false)}
-                className="py-4 text-[16px] text-[#A3A3A3] border-b border-[#1A1A1A]"
+                href="#cta"
+                className="block text-[13px] font-medium text-black bg-white px-4 py-2.5 rounded-lg text-center mt-3"
               >
-                {l.label}
+                Get Started
               </a>
-            ))}
-            <a
-              href="#cta"
-              onClick={() => setOpen(false)}
-              className="mt-4 text-center py-3 bg-[#2563EB] rounded-lg text-[15px] font-medium"
-            >
-              Get Started
-            </a>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </>
+    </nav>
   );
 }

@@ -15,7 +15,7 @@ const jetbrains = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "AI Automation System — Agency Demo",
   description:
-    "AI-powered automation for marketing agencies. 24/7 support, lead qualification, ad tracking, and reporting.",
+    "AI-powered lead automation for marketing agencies. Instant response, qualification, and CRM logging across every channel.",
 };
 
 export default function RootLayout({
@@ -23,7 +23,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${jetbrains.variable} antialiased`}>
+      <body className={`${inter.variable} ${jetbrains.variable} font-sans antialiased`}>
         {children}
       </body>
     </html>
