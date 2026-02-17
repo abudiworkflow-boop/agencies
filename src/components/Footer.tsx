@@ -1,50 +1,57 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 export default function Footer() {
   return (
     <>
-      {/* CTA Section */}
-      <section id="cta" className="section-padding px-6">
-        <div className="max-w-3xl mx-auto text-center">
+      {/* CTA */}
+      <section id="cta" className="py-28 px-6">
+        <div className="max-w-[1200px] mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            className="rounded-2xl border border-[#1A1A1A] bg-[#0A0A0A] p-10 md:p-16 text-center relative overflow-hidden"
           >
-            <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-5">
-              Ready to <span className="text-gradient">Automate</span>?
-            </h2>
-            <p className="text-[#71717A] text-[16px] max-w-lg mx-auto mb-10 leading-relaxed">
-              Stop losing leads to slow response times. Let AI handle every
-              inquiry instantly, 24/7, across every channel.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <a href="#" className="btn-primary text-[16px] !py-3.5 !px-8">
-                Start Automating
-                <ArrowRight className="w-4 h-4" />
-              </a>
-              <a href="#live-demo" className="btn-secondary text-[16px] !py-3.5 !px-8">
-                Watch Demo Again
-              </a>
+            {/* Accent glow */}
+            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-[200px] bg-[#2563EB]/[0.06] rounded-full blur-[100px] pointer-events-none" />
+
+            <div className="relative z-10">
+              <h2 className="text-[32px] md:text-[48px] font-bold tracking-[-0.03em] leading-tight mb-4">
+                Ready to automate?
+              </h2>
+              <p className="text-[15px] text-[#525252] max-w-md mx-auto mb-8 leading-relaxed">
+                Stop losing leads to slow response times. Let AI handle every
+                inquiry instantly, 24/7, across every channel.
+              </p>
+              <div className="flex flex-wrap justify-center gap-3">
+                <a href="#" className="inline-flex items-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-[14px] font-medium px-6 py-3 rounded-lg transition-colors">
+                  Start Automating <ArrowRight size={15} />
+                </a>
+                <a href="#demo" className="inline-flex items-center gap-2 text-[14px] font-medium text-[#525252] hover:text-white border border-[#1A1A1A] hover:border-[#262626] px-6 py-3 rounded-lg transition-all">
+                  Watch Demo Again
+                </a>
+              </div>
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* Footer bar */}
-      <footer className="border-t border-[#1E1E22] px-6 py-8">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <footer className="border-t border-[#1A1A1A] px-6 py-6">
+        <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-md bg-blue-500 flex items-center justify-center">
-              <Zap className="w-3 h-3 text-white" />
+            <div className="w-5 h-5 rounded bg-[#2563EB] flex items-center justify-center">
+              <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
             </div>
-            <span className="text-[13px] font-semibold text-[#71717A]">AutomateAI</span>
+            <span className="text-[12px] text-[#525252]">AutomateAI</span>
           </div>
-          <p className="text-[12px] text-[#3F3F46]">
-            Built with n8n + GPT-4o-mini. Fully automated, zero manual work.
+          <p className="text-[11px] text-[#404040]">
+            Powered by n8n + GPT-4o-mini. Fully automated, zero manual work.
           </p>
         </div>
       </footer>

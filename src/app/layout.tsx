@@ -14,14 +14,13 @@ const jetbrains = JetBrains_Mono({
 
 export const metadata: Metadata = {
   title: "AI Automation System — Agency Demo",
-  description: "AI-powered automation for marketing agencies. 24/7 support, lead qualification, ad tracking, and reporting.",
+  description:
+    "AI-powered automation for marketing agencies. 24/7 support, lead qualification, ad tracking, and reporting.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body className={`${inter.variable} ${jetbrains.variable} antialiased`}>

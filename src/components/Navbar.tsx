@@ -2,14 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Zap, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 
 const links = [
-  { label: "How It Works", href: "#how-it-works" },
-  { label: "Live Demo", href: "#live-demo" },
+  { label: "Features", href: "#features" },
+  { label: "Demo", href: "#demo" },
   { label: "Dashboard", href: "#dashboard" },
-  { label: "Analytics", href: "#analytics" },
-  { label: "Modules", href: "#modules" },
+  { label: "Results", href: "#results" },
 ];
 
 export default function Navbar() {
@@ -17,53 +16,44 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
+    const h = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", h);
+    return () => window.removeEventListener("scroll", h);
   }, []);
 
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? "bg-[#09090B]/90 backdrop-blur-md border-b border-[#1E1E22]"
-            : "bg-transparent"
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+          scrolled ? "bg-black/80 backdrop-blur-md border-b border-[#1A1A1A]" : ""
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-blue-500 flex items-center justify-center">
-              <Zap className="w-4 h-4 text-white" />
+        <div className="max-w-[1200px] mx-auto px-6 h-14 flex items-center justify-between">
+          <a href="#" className="flex items-center gap-2">
+            <div className="w-7 h-7 rounded-md bg-[#2563EB] flex items-center justify-center">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+              </svg>
             </div>
-            <span className="text-[15px] font-bold tracking-tight text-white">
-              AutomateAI
-            </span>
+            <span className="text-[14px] font-semibold tracking-tight">AutomateAI</span>
           </a>
 
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-6">
             {links.map((l) => (
-              <a
-                key={l.label}
-                href={l.href}
-                className="px-3.5 py-2 text-[13px] text-[#71717A] hover:text-white transition-colors duration-200"
-              >
+              <a key={l.href} href={l.href} className="text-[13px] text-[#525252] hover:text-white transition-colors">
                 {l.label}
               </a>
             ))}
-          </div>
-
-          <div className="hidden md:block">
-            <a href="#cta" className="btn-primary text-[13px] !py-2 !px-5">
+            <a
+              href="#cta"
+              className="text-[13px] font-medium text-white bg-[#2563EB] hover:bg-[#1D4ED8] px-4 py-1.5 rounded-lg transition-colors"
+            >
               Get Started
             </a>
           </div>
 
-          <button
-            onClick={() => setOpen(!open)}
-            className="md:hidden p-2 text-[#71717A] hover:text-white transition-colors"
-          >
-            {open ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          <button onClick={() => setOpen(!open)} className="md:hidden text-[#A3A3A3]">
+            {open ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </nav>
@@ -74,31 +64,25 @@ export default function Navbar() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-[#09090B]/98 backdrop-blur-sm pt-20 px-6"
+            className="fixed inset-0 z-40 bg-black/95 pt-16 px-6 flex flex-col gap-2"
           >
-            <div className="flex flex-col gap-1 max-w-sm mx-auto">
-              {links.map((l, i) => (
-                <motion.a
-                  key={l.label}
-                  href={l.href}
-                  onClick={() => setOpen(false)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.05 }}
-                  className="px-4 py-4 text-[15px] text-[#A1A1AA] hover:text-white border-b border-[#1E1E22] transition-colors"
-                >
-                  {l.label}
-                </motion.a>
-              ))}
+            {links.map((l) => (
               <a
-                href="#cta"
+                key={l.href}
+                href={l.href}
                 onClick={() => setOpen(false)}
-                className="btn-primary mt-6 text-center"
+                className="py-4 text-[16px] text-[#A3A3A3] border-b border-[#1A1A1A]"
               >
-                Get Started
+                {l.label}
               </a>
-            </div>
+            ))}
+            <a
+              href="#cta"
+              onClick={() => setOpen(false)}
+              className="mt-4 text-center py-3 bg-[#2563EB] rounded-lg text-[15px] font-medium"
+            >
+              Get Started
+            </a>
           </motion.div>
         )}
       </AnimatePresence>
