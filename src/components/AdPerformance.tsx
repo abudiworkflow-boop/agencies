@@ -2,154 +2,151 @@
 
 import { motion } from "framer-motion";
 import {
-  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip,
-  ResponsiveContainer, AreaChart, Area,
+  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
+  AreaChart, Area, CartesianGrid,
 } from "recharts";
-import { DollarSign, MousePointer, Eye, Target } from "lucide-react";
+import { DollarSign, MousePointerClick, Eye, Target } from "lucide-react";
 
-const weeklyData = [
-  { day: "Mon", meta: 120, google: 85, leads: 12 },
-  { day: "Tue", meta: 135, google: 90, leads: 15 },
-  { day: "Wed", meta: 110, google: 95, leads: 11 },
-  { day: "Thu", meta: 145, google: 80, leads: 18 },
-  { day: "Fri", meta: 160, google: 100, leads: 22 },
-  { day: "Sat", meta: 90, google: 60, leads: 8 },
-  { day: "Sun", meta: 80, google: 50, leads: 7 },
+const weeklySpend = [
+  { week: "W1", meta: 620, google: 480 },
+  { week: "W2", meta: 740, google: 520 },
+  { week: "W3", meta: 680, google: 610 },
+  { week: "W4", meta: 820, google: 550 },
+  { week: "W5", meta: 760, google: 640 },
+  { week: "W6", meta: 900, google: 580 },
+  { week: "W7", meta: 850, google: 700 },
+  { week: "W8", meta: 940, google: 720 },
 ];
 
 const conversionData = [
-  { day: "Week 1", rate: 12 },
-  { day: "Week 2", rate: 18 },
-  { day: "Week 3", rate: 22 },
-  { day: "Week 4", rate: 28 },
-  { day: "Week 5", rate: 31 },
-  { day: "Week 6", rate: 35 },
-  { day: "Week 7", rate: 38 },
-  { day: "Week 8", rate: 42 },
+  { week: "W1", rate: 2.1 },
+  { week: "W2", rate: 2.8 },
+  { week: "W3", rate: 3.2 },
+  { week: "W4", rate: 3.0 },
+  { week: "W5", rate: 3.9 },
+  { week: "W6", rate: 4.1 },
+  { week: "W7", rate: 4.5 },
+  { week: "W8", rate: 5.2 },
 ];
 
-const metrics = [
-  { label: "Ad Spend", value: "$4,280", sub: "This month", icon: DollarSign, gradient: "from-emerald-500 to-teal-600" },
-  { label: "Total Clicks", value: "8,492", sub: "+24% vs last month", icon: MousePointer, gradient: "from-indigo-500 to-blue-600" },
-  { label: "Impressions", value: "142K", sub: "Across all platforms", icon: Eye, gradient: "from-purple-500 to-pink-600" },
-  { label: "Cost Per Lead", value: "$12.40", sub: "-18% improvement", icon: Target, gradient: "from-amber-500 to-orange-600" },
+const kpis = [
+  { icon: DollarSign, label: "Ad Spend", value: "$4,280", sub: "This month", color: "text-blue-400", bg: "bg-blue-500/10" },
+  { icon: MousePointerClick, label: "Clicks", value: "8,492", sub: "CTR 3.2%", color: "text-violet-400", bg: "bg-violet-500/10" },
+  { icon: Eye, label: "Impressions", value: "142K", sub: "Across platforms", color: "text-amber-400", bg: "bg-amber-500/10" },
+  { icon: Target, label: "Cost Per Lead", value: "$12.40", sub: "-22% vs last month", color: "text-emerald-400", bg: "bg-emerald-500/10" },
 ];
 
-const tooltipStyle = {
-  backgroundColor: "rgba(15, 15, 35, 0.95)",
-  border: "1px solid rgba(255,255,255,0.06)",
-  borderRadius: "12px",
-  fontSize: "12px",
-  padding: "10px 14px",
-  boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
+const CustomTooltip = ({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number; dataKey: string }>; label?: string }) => {
+  if (!active || !payload) return null;
+  return (
+    <div className="bg-[#18181B] border border-[#27272A] rounded-lg px-3 py-2 text-[12px] shadow-xl">
+      <p className="text-[#71717A] mb-1 font-medium">{label}</p>
+      {payload.map((p, i) => (
+        <p key={i} className="text-[#E4E4E7]">
+          <span className="capitalize">{p.dataKey}</span>: {typeof p.value === "number" && p.dataKey !== "rate" ? `$${p.value}` : `${p.value}%`}
+        </p>
+      ))}
+    </div>
+  );
 };
 
 export default function AdPerformance() {
   return (
-    <section id="analytics" className="py-32 px-6 relative">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_right,_rgba(99,102,241,0.04)_0%,_transparent_50%)]" />
-
-      <div className="max-w-7xl mx-auto relative">
+    <section id="analytics" className="section-padding px-6">
+      <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-14"
         >
-          <span className="text-xs font-semibold text-amber-400 uppercase tracking-[0.2em] mb-4 block">
+          <p className="text-[12px] font-semibold text-amber-400 uppercase tracking-[0.15em] mb-3">
             Analytics
-          </span>
-          <h2 className="text-4xl md:text-6xl font-bold tracking-tight mb-5">
-            Ad Performance <span className="gradient-text-blue">Tracking</span>
+          </p>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">
+            Ad Performance
           </h2>
-          <p className="text-gray-500 text-lg max-w-xl mx-auto">
-            Meta Ads & Google Ads data pulled automatically — every dollar tracked
+          <p className="text-[#71717A] text-[15px] max-w-md mx-auto">
+            Track spend, clicks, and conversions across all platforms
           </p>
         </motion.div>
 
-        {/* Metrics */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {metrics.map((m, i) => (
-            <motion.div
-              key={m.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08 }}
-              className="stat-card glass-card-sm p-6"
-            >
-              <div className={`w-11 h-11 rounded-xl bg-gradient-to-br ${m.gradient} flex items-center justify-center shadow-lg mb-4`}>
-                <m.icon className="w-5 h-5 text-white" />
+        {/* KPI row */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
+        >
+          {kpis.map((k) => (
+            <div key={k.label} className="card p-5">
+              <div className={`w-9 h-9 rounded-lg ${k.bg} flex items-center justify-center mb-3`}>
+                <k.icon className={`w-[18px] h-[18px] ${k.color}`} />
               </div>
-              <div className="text-2xl font-bold tracking-tight mb-0.5">{m.value}</div>
-              <div className="text-xs text-gray-500">{m.label}</div>
-              <div className="text-[10px] text-gray-600 mt-1">{m.sub}</div>
-            </motion.div>
+              <div className="text-xl font-bold tracking-tight mb-0.5">{k.value}</div>
+              <div className="text-[12px] text-[#52525B]">{k.label}</div>
+              <div className="text-[11px] text-[#3F3F46] mt-1">{k.sub}</div>
+            </div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Charts */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Bar chart */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="lg:col-span-3 glass-card p-6"
+            className="card p-5"
           >
             <div className="flex items-center justify-between mb-6">
-              <div>
-                <h3 className="text-sm font-semibold">Weekly Ad Spend</h3>
-                <p className="text-[11px] text-gray-500 mt-0.5">Meta vs Google breakdown</p>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-sm bg-indigo-500" />
-                  <span className="text-[10px] text-gray-400">Meta</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-sm bg-emerald-500" />
-                  <span className="text-[10px] text-gray-400">Google</span>
-                </div>
+              <h3 className="text-[14px] font-semibold">Weekly Ad Spend</h3>
+              <div className="flex items-center gap-4 text-[11px] text-[#71717A]">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-sm bg-blue-500" /> Meta
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="w-2.5 h-2.5 rounded-sm bg-violet-500" /> Google
+                </span>
               </div>
             </div>
-            <ResponsiveContainer width="100%" height={280}>
-              <BarChart data={weeklyData} barGap={4}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.03)" />
-                <XAxis dataKey="day" stroke="#4b5563" fontSize={11} tickLine={false} axisLine={false} />
-                <YAxis stroke="#4b5563" fontSize={11} tickLine={false} axisLine={false} tickFormatter={(v) => `$${v}`} />
-                <Tooltip contentStyle={tooltipStyle} cursor={{ fill: "rgba(255,255,255,0.02)" }} />
-                <Bar dataKey="meta" name="Meta Ads" fill="#6366f1" radius={[6, 6, 0, 0]} />
-                <Bar dataKey="google" name="Google Ads" fill="#10b981" radius={[6, 6, 0, 0]} />
+            <ResponsiveContainer width="100%" height={240}>
+              <BarChart data={weeklySpend} barGap={4}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#1E1E22" vertical={false} />
+                <XAxis dataKey="week" tick={{ fill: "#52525B", fontSize: 11 }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fill: "#52525B", fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={(v) => `$${v}`} />
+                <Tooltip content={<CustomTooltip />} cursor={{ fill: "rgba(255,255,255,0.02)" }} />
+                <Bar dataKey="meta" fill="#3B82F6" radius={[4, 4, 0, 0]} maxBarSize={28} />
+                <Bar dataKey="google" fill="#8B5CF6" radius={[4, 4, 0, 0]} maxBarSize={28} />
               </BarChart>
             </ResponsiveContainer>
           </motion.div>
 
-          {/* Conversion trend */}
+          {/* Area chart */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.15 }}
-            className="lg:col-span-2 glass-card p-6"
+            transition={{ delay: 0.1 }}
+            className="card p-5"
           >
-            <div className="mb-6">
-              <h3 className="text-sm font-semibold">Conversion Rate</h3>
-              <p className="text-[11px] text-gray-500 mt-0.5">Trending upward</p>
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-[14px] font-semibold">Conversion Rate Trend</h3>
+              <span className="text-[11px] text-emerald-400 font-semibold">+148% growth</span>
             </div>
-            <ResponsiveContainer width="100%" height={280}>
+            <ResponsiveContainer width="100%" height={240}>
               <AreaChart data={conversionData}>
                 <defs>
                   <linearGradient id="convGrad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#6366f1" stopOpacity={0.3} />
-                    <stop offset="100%" stopColor="#6366f1" stopOpacity={0} />
+                    <stop offset="0%" stopColor="#10B981" stopOpacity={0.2} />
+                    <stop offset="100%" stopColor="#10B981" stopOpacity={0} />
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.03)" />
-                <XAxis dataKey="day" stroke="#4b5563" fontSize={10} tickLine={false} axisLine={false} />
-                <YAxis stroke="#4b5563" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(v) => `${v}%`} />
-                <Tooltip contentStyle={tooltipStyle} />
-                <Area type="monotone" dataKey="rate" name="Conv. Rate" stroke="#6366f1" strokeWidth={2} fill="url(#convGrad)" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#1E1E22" vertical={false} />
+                <XAxis dataKey="week" tick={{ fill: "#52525B", fontSize: 11 }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fill: "#52525B", fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={(v) => `${v}%`} />
+                <Tooltip content={<CustomTooltip />} />
+                <Area type="monotone" dataKey="rate" stroke="#10B981" strokeWidth={2} fill="url(#convGrad)" />
               </AreaChart>
             </ResponsiveContainer>
           </motion.div>

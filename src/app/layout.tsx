@@ -1,20 +1,20 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const jetbrains = JetBrains_Mono({
+  variable: "--font-jetbrains",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "AI Automation System | Agency Demo",
-  description: "AI-powered automation system for marketing agencies — 24/7 customer support, lead qualification, ad tracking & reporting",
+  title: "AI Automation System — Agency Demo",
+  description: "AI-powered automation for marketing agencies. 24/7 support, lead qualification, ad tracking, and reporting.",
 };
 
 export default function RootLayout({
@@ -23,10 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#0a0a0a] text-white`}
-      >
+    <html lang="en">
+      <body className={`${inter.variable} ${jetbrains.variable} antialiased`}>
         {children}
       </body>
     </html>

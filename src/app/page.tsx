@@ -9,20 +9,20 @@ import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#050510]">
+    <main className="min-h-screen">
       <Navbar />
       <HeroSection />
-      <div className="section-divider" />
+      <div className="divider max-w-6xl mx-auto" />
       <SystemFlow />
-      <div className="section-divider" />
+      <div className="divider max-w-6xl mx-auto" />
       <ChatSimulator />
-      <div className="section-divider" />
+      <div className="divider max-w-6xl mx-auto" />
       <LeadDashboard />
-      <div className="section-divider" />
+      <div className="divider max-w-6xl mx-auto" />
       <AdPerformance />
-      <div className="section-divider" />
+      <div className="divider max-w-6xl mx-auto" />
       <Features />
-      <div className="section-divider" />
+      <div className="divider max-w-6xl mx-auto" />
       <Footer />
     </main>
   );
