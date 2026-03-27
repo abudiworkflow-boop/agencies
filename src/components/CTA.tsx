@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, CheckCircle2, MessageCircle, Loader2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, MessageCircle, Loader2, Shield, Clock, Gift } from "lucide-react";
 
 const WHATSAPP_URL =
   "https://wa.me/966507120867?text=Hey%20I%20saw%20the%20AI%20Lead%20System%20demo%20and%20I%20want%20to%20get%20started";
@@ -49,7 +49,6 @@ export default function CTA() {
       phone: `${form.countryCode}${form.phone}`,
     };
 
-    // Log for now — connect to real backend later
     console.log("Lead submitted:", payload);
 
     try {
@@ -59,7 +58,7 @@ export default function CTA() {
         body: JSON.stringify(payload),
       });
     } catch {
-      // Silently handle — form still shows success
+      // Silently handle
     }
 
     setSubmitting(false);
@@ -76,13 +75,21 @@ export default function CTA() {
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="relative rounded-2xl border border-[#1A1A1A] bg-[#0A0A0A] p-8 md:p-16 overflow-hidden"
+          className="relative rounded-2xl border border-[#1A1A1A] bg-[#0A0A0A] overflow-hidden"
         >
-          {/* Background glow */}
+          {/* Background effects */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#2563EB]/[0.06] rounded-full blur-[120px] pointer-events-none" />
           <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-[#22C55E]/[0.03] rounded-full blur-[100px] pointer-events-none" />
 
-          <div className="relative z-10">
+          {/* Urgency bar */}
+          <div className="bg-[#2563EB]/10 border-b border-[#2563EB]/20 px-6 py-3 flex items-center justify-center gap-3">
+            <Clock size={14} className="text-[#2563EB]" />
+            <span className="text-[12px] font-medium text-[#93B4F5]">
+              Only 5 spots left for this month — systems go live within 7 days
+            </span>
+          </div>
+
+          <div className="relative z-10 p-8 md:p-16">
             <AnimatePresence mode="wait">
               {submitted ? (
                 <motion.div
@@ -97,8 +104,11 @@ export default function CTA() {
                   <h3 className="text-[28px] md:text-[36px] font-bold text-white mb-3">
                     You&apos;re in!
                   </h3>
-                  <p className="text-[16px] text-[#A3A3A3] max-w-md mx-auto mb-8 leading-relaxed">
-                    We&apos;ll set up your system within 7 days. Expect a message from us within the hour.
+                  <p className="text-[16px] text-[#A3A3A3] max-w-md mx-auto mb-4 leading-relaxed">
+                    We&apos;ll set up your system within 7 days.
+                  </p>
+                  <p className="text-[14px] text-[#22C55E] font-medium max-w-md mx-auto mb-8">
+                    Expect a message from us within the hour.
                   </p>
                   <a
                     href={WHATSAPP_URL}
@@ -120,14 +130,15 @@ export default function CTA() {
                   {/* Header */}
                   <div className="text-center mb-10">
                     <h2 className="text-[32px] md:text-[48px] font-bold tracking-[-0.03em] leading-tight text-white mb-4">
-                      Let&apos;s build your system.
+                      Ready to stop losing leads?
                     </h2>
-                    <p className="text-[15px] text-[#525252] max-w-md mx-auto leading-relaxed">
-                      Fill in your details and we&apos;ll have your AI lead system live within 7 days. No fluff, just results.
+                    <p className="text-[15px] text-[#525252] max-w-lg mx-auto leading-relaxed">
+                      Fill in your details and we&apos;ll have your AI lead system live within 7 days.
+                      Your first qualified lead could come in within 24 hours of launch.
                     </p>
                   </div>
 
-                  <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-10 items-start">
+                  <div className="grid grid-cols-1 lg:grid-cols-[1fr_340px] gap-10 items-start">
                     {/* Form */}
                     <form onSubmit={handleSubmit} className="space-y-4">
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -214,21 +225,23 @@ export default function CTA() {
                           <Loader2 size={18} className="animate-spin" />
                         ) : (
                           <>
-                            Get Started <ArrowRight size={16} />
+                            Claim Your Spot — Get Started <ArrowRight size={16} />
                           </>
                         )}
                       </button>
+
+                      <p className="text-[11px] text-[#404040] text-center">
+                        No payment required now. We&apos;ll discuss your setup on the call.
+                      </p>
                     </form>
 
-                    {/* WhatsApp side panel */}
-                    <div className="flex flex-col items-center lg:items-start gap-4 lg:pt-6">
-                      <div className="hidden lg:block h-px w-full bg-[#1A1A1A] lg:h-full lg:w-px lg:hidden" />
-
-                      <div className="text-center lg:text-left w-full">
-                        <div className="inline-flex items-center gap-2 bg-[#111] border border-[#1A1A1A] rounded-xl px-4 py-2 mb-4">
-                          <span className="text-[12px] text-[#525252]">or skip the form</span>
-                        </div>
-
+                    {/* Right side panel */}
+                    <div className="flex flex-col gap-5 lg:pt-2">
+                      {/* WhatsApp option */}
+                      <div className="rounded-2xl border border-[#1A1A1A] bg-[#050505] p-5">
+                        <p className="text-[12px] text-[#525252] uppercase tracking-wider font-medium mb-3">
+                          Prefer to chat?
+                        </p>
                         <a
                           href={WHATSAPP_URL}
                           target="_blank"
@@ -238,25 +251,26 @@ export default function CTA() {
                           <MessageCircle size={20} />
                           Message us on WhatsApp
                         </a>
-                        <p className="text-[12px] text-[#404040] mt-3 text-center lg:text-left">
-                          Chat directly with our team. We typically reply within minutes.
+                        <p className="text-[11px] text-[#404040] mt-3 text-center">
+                          We typically reply within minutes.
                         </p>
                       </div>
 
                       {/* Trust signals */}
-                      <div className="w-full space-y-3 mt-4">
+                      <div className="space-y-3">
                         {[
-                          "Setup in 7 days or less",
-                          "Full ownership — no monthly fees",
-                          "30 days of free support",
-                        ].map((item) => (
-                          <div key={item} className="flex items-center gap-2.5">
-                            <div className="w-4 h-4 rounded-full bg-[#2563EB]/10 flex items-center justify-center flex-shrink-0">
-                              <CheckCircle2 size={10} className="text-[#2563EB]" />
+                          { icon: Clock, text: "Setup in 7 days or less" },
+                          { icon: Shield, text: "30-day satisfaction guarantee" },
+                          { icon: Gift, text: "Full ownership — no monthly fees" },
+                        ].map((item) => {
+                          const Icon = item.icon;
+                          return (
+                            <div key={item.text} className="flex items-center gap-3 rounded-xl border border-[#1A1A1A] bg-[#050505] px-4 py-3">
+                              <Icon size={16} className="text-[#2563EB] flex-shrink-0" />
+                              <span className="text-[12px] text-[#A3A3A3] font-medium">{item.text}</span>
                             </div>
-                            <span className="text-[12px] text-[#737373]">{item}</span>
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
                   </div>

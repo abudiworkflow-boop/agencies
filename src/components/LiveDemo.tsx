@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Bot, User, Play, RotateCcw, CheckCheck } from "lucide-react";
+import { Bot, User, Play, RotateCcw, CheckCheck, ArrowRight } from "lucide-react";
 
 interface Msg {
   id: number;
@@ -35,14 +35,32 @@ export default function LiveDemo() {
   const [playing, setPlaying] = useState(false);
   const [idx, setIdx] = useState(0);
   const [done, setDone] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const [autoStarted, setAutoStarted] = useState(false);
+  const chatRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
 
-  const start = () => {
+  const start = useCallback(() => {
     setMsgs([]);
     setIdx(0);
     setDone(false);
     setPlaying(true);
-  };
+  }, []);
+
+  // Auto-play when scrolled into view
+  useEffect(() => {
+    if (autoStarted) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setAutoStarted(true);
+          start();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
+  }, [autoStarted, start]);
 
   useEffect(() => {
     if (!playing) return;
@@ -60,19 +78,19 @@ export default function LiveDemo() {
   }, [playing, idx]);
 
   useEffect(() => {
-    ref.current?.scrollTo({ top: ref.current.scrollHeight, behavior: "smooth" });
+    chatRef.current?.scrollTo({ top: chatRef.current.scrollHeight, behavior: "smooth" });
   }, [msgs]);
 
   const msgCount = msgs.length;
 
   return (
-    <section id="demo" className="py-24 px-6">
+    <section id="demo" className="py-24 px-6" ref={sectionRef}>
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mb-14"
+          className="mb-4"
         >
           <p className="text-[12px] font-medium text-[#2563EB] uppercase tracking-wider mb-3">
             Live demo
@@ -83,6 +101,15 @@ export default function LiveDemo() {
             <span className="text-[#525252]">In real time.</span>
           </h2>
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0, y: 8 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-[14px] text-[#525252] mb-10 max-w-xl"
+        >
+          This is a real AI conversation. Watch how it captures intent, qualifies the lead, scores them, and logs everything — all in under 3 minutes.
+        </motion.p>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4">
           {/* Chat window */}
@@ -123,7 +150,7 @@ export default function LiveDemo() {
             </div>
 
             {/* Messages */}
-            <div ref={ref} className="flex-1 min-h-[420px] max-h-[520px] overflow-y-auto p-5 space-y-3">
+            <div ref={chatRef} className="flex-1 min-h-[420px] max-h-[520px] overflow-y-auto p-5 space-y-3">
               {msgs.length === 0 && !playing && (
                 <div className="h-full flex items-center justify-center">
                   <div className="text-center">
@@ -206,6 +233,29 @@ export default function LiveDemo() {
                 </motion.div>
               )}
             </div>
+
+            {/* Post-demo CTA bar */}
+            <AnimatePresence>
+              {done && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  className="border-t border-[#1A1A1A] bg-[#050505] px-5 py-4"
+                >
+                  <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <p className="text-[13px] text-[#737373]">
+                      That&apos;s your AI handling a lead from first message to CRM. <span className="text-white font-medium">Want this for your business?</span>
+                    </p>
+                    <a
+                      href="#cta"
+                      className="inline-flex items-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-[13px] font-semibold px-5 py-2.5 rounded-lg transition-colors whitespace-nowrap"
+                    >
+                      Get Started <ArrowRight size={14} />
+                    </a>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </motion.div>
 
           {/* AI Extraction sidebar */}
@@ -233,8 +283,10 @@ export default function LiveDemo() {
               {quals.map((q) => {
                 const active = msgCount >= q.at;
                 return (
-                  <div
+                  <motion.div
                     key={q.key}
+                    animate={active ? { scale: [1, 1.02, 1] } : {}}
+                    transition={{ duration: 0.3 }}
                     className={`rounded-xl border px-4 py-3 transition-all duration-300 ${
                       active
                         ? q.key === "score"
@@ -255,7 +307,7 @@ export default function LiveDemo() {
                     >
                       {active ? q.value : "—"}
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
@@ -275,7 +327,7 @@ export default function LiveDemo() {
                     </span>
                   </div>
                   <p className="text-[10px] text-[#525252]">
-                    Lead logged to Google Sheets automatically
+                    Lead logged automatically with full history
                   </p>
                 </motion.div>
               )}

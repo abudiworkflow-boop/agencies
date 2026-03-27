@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 
 const metrics = [
   { label: "Response Time", before: "2-4 hours", after: "< 3 seconds", impact: "99.9% faster" },
@@ -31,9 +32,12 @@ export default function Results() {
           <p className="text-[12px] font-medium text-[#2563EB] uppercase tracking-wider mb-3">
             Results
           </p>
-          <h2 className="text-[32px] sm:text-[44px] font-bold tracking-[-0.03em] leading-tight text-white">
+          <h2 className="text-[32px] sm:text-[44px] font-bold tracking-[-0.03em] leading-tight text-white mb-3">
             Before vs After.
           </h2>
+          <p className="text-[14px] text-[#525252] max-w-xl">
+            Real numbers from businesses that switched from manual lead handling to our AI system.
+          </p>
         </motion.div>
 
         {/* Comparison table */}
@@ -66,7 +70,7 @@ export default function Results() {
         <motion.div
           {...fadeUp}
           transition={{ delay: 0.3 }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8"
         >
           {highlights.map((n) => (
             <div
@@ -80,6 +84,26 @@ export default function Results() {
               <div className="text-[12px] text-[#525252]">{n.desc}</div>
             </div>
           ))}
+        </motion.div>
+
+        {/* CTA strip */}
+        <motion.div {...fadeUp} transition={{ delay: 0.4 }}>
+          <div className="rounded-2xl border border-[#2563EB]/10 bg-[#2563EB]/5 p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div>
+              <p className="text-[15px] font-semibold text-white mb-1">
+                Want these results for your business?
+              </p>
+              <p className="text-[13px] text-[#525252]">
+                Most clients see their first AI-qualified lead within 24 hours of launch.
+              </p>
+            </div>
+            <a
+              href="#pricing"
+              className="inline-flex items-center gap-2 bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-[14px] font-semibold px-6 py-3 rounded-xl transition-colors whitespace-nowrap"
+            >
+              See Pricing <ArrowRight size={14} />
+            </a>
+          </div>
         </motion.div>
       </div>
     </section>
