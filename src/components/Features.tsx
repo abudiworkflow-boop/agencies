@@ -42,7 +42,7 @@ const features = [
   {
     icon: Brain,
     title: "AI Response Engine",
-    desc: "GPT-4o-mini answers in under 3 seconds, maintaining context across the entire conversation.",
+    desc: "AI answers in under 3 seconds, maintaining context across the entire conversation.",
     span: "",
     visual: (
       <div className="mt-4 space-y-2">

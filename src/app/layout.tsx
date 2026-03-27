@@ -13,9 +13,9 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Automation System — Agency Demo",
+  title: "AutomateAI — AI Lead Flow System",
   description:
-    "AI-powered lead automation for marketing agencies. Instant response, qualification, and CRM logging across every channel.",
+    "AI-powered lead capture and qualification across WhatsApp, Instagram, Email & Website. Instant responses, smart follow-ups, and full CRM integration.",
 };
 
 export default function RootLayout({
