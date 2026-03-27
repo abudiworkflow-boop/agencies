@@ -5,7 +5,6 @@ import Features from "@/components/Features";
 import LiveDemo from "@/components/LiveDemo";
 import Dashboard from "@/components/Dashboard";
 import Results from "@/components/Results";
-import Testimonials from "@/components/Testimonials";
 import Pricing from "@/components/Pricing";
 import FAQ from "@/components/FAQ";
 import CTA from "@/components/CTA";
@@ -22,7 +21,6 @@ export default function Home() {
       <LiveDemo />
       <Dashboard />
       <Results />
-      <Testimonials />
       <Pricing />
       <FAQ />
       <CTA />
