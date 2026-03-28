@@ -135,7 +135,7 @@ export default function Hero() {
             href="#cta"
             className="inline-flex items-center gap-2 bg-white text-black text-[14px] font-semibold px-7 py-3.5 rounded-lg hover:bg-neutral-200 transition-colors"
           >
-            Get Started — $1000 <ArrowRight size={15} />
+            Get Started — $700 <ArrowRight size={15} />
           </a>
           <a
             href="#demo"

@@ -88,7 +88,7 @@ export default function Pricing() {
                     </p>
                     <div className="flex items-baseline justify-center gap-1 mb-2">
                       <span className="text-[64px] md:text-[72px] font-bold tracking-tight text-white leading-none">
-                        $1000
+                        $700
                       </span>
                     </div>
                     <p className="text-[14px] text-[#737373]">one-time setup</p>
@@ -117,7 +117,7 @@ export default function Pricing() {
                     href="#cta"
                     className="block w-full text-center bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-[15px] font-semibold px-6 py-4 rounded-xl transition-colors"
                   >
-                    Get Started — $1000
+                    Get Started — $700
                   </a>
 
                   {/* Guarantee */}
