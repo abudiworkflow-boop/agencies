@@ -13,7 +13,7 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AutomateAI — AI Lead Flow System",
+  title: "AbudiAuto — AI Lead Flow System",
   description:
     "AI-powered lead capture and qualification across WhatsApp, Instagram, Email & Website. Instant responses, smart follow-ups, and full CRM integration.",
 };

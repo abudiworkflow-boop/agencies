@@ -36,7 +36,7 @@ export default function Navbar() {
           <div className="w-8 h-8 rounded-lg bg-[#2563EB] flex items-center justify-center">
             <Zap size={16} className="text-white fill-white" />
           </div>
-          <span className="text-[15px] font-semibold text-white">AutomateAI</span>
+          <span className="text-[15px] font-semibold text-white">AbudiAuto</span>
         </a>
 
         {/* Desktop links */}

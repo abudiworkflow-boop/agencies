@@ -153,7 +153,7 @@ export default function Pricing() {
               <div className="grid grid-cols-3 gap-4 px-6 py-3 bg-[#050505] border-b border-[#1A1A1A]">
                 <span className="text-[10px] text-[#525252] uppercase tracking-wider font-medium" />
                 <span className="text-[10px] text-[#2563EB] uppercase tracking-wider font-medium text-center">
-                  AutomateAI
+                  AbudiAuto
                 </span>
                 <span className="text-[10px] text-[#525252] uppercase tracking-wider font-medium text-center">
                   Sales Rep

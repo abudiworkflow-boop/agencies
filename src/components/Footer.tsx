@@ -14,7 +14,7 @@ export default function Footer() {
             <div className="w-5 h-5 rounded bg-[#2563EB] flex items-center justify-center">
               <Zap size={10} className="text-white fill-white" />
             </div>
-            <span className="text-[12px] text-[#525252]">AutomateAI</span>
+            <span className="text-[12px] text-[#525252]">AbudiAuto</span>
           </div>
           <p className="text-[11px] text-[#404040] text-center">
             Enterprise-grade AI infrastructure. Built for your business.

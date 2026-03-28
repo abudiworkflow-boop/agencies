@@ -300,7 +300,7 @@ export default function Hero() {
               </div>
               <div className="flex-1 flex justify-center">
                 <div className="bg-[#111] rounded-md px-4 py-1 text-[11px] text-[#525252] font-mono">
-                  automateai.dashboard
+                  abudiauto.dashboard
                 </div>
               </div>
             </div>

@@ -94,7 +94,7 @@ export default function Dashboard() {
                 <div className="w-2.5 h-2.5 rounded-full bg-[#EAB308]/50" />
                 <div className="w-2.5 h-2.5 rounded-full bg-[#22C55E]/50" />
               </div>
-              <span className="text-[11px] text-[#404040] font-mono ml-2">dashboard.automateai.app</span>
+              <span className="text-[11px] text-[#404040] font-mono ml-2">dashboard.abudiauto.com</span>
             </div>
             {/* Tab switcher */}
             <div className="flex gap-1 bg-[#0A0A0A] border border-[#1A1A1A] rounded-lg p-0.5">
