@@ -109,7 +109,7 @@ function LiveNotifications() {
   }, [current, showNext]);
 
   return (
-    <div className="fixed top-20 right-4 z-40 pointer-events-none w-72 sm:w-80">
+    <div className="hidden sm:block fixed top-20 right-4 z-40 pointer-events-none w-72 sm:w-80">
       <AnimatePresence>
         {current >= 0 && current < notifications.length && (
           <motion.div
@@ -239,18 +239,18 @@ export default function Hero() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="flex items-center justify-center gap-4 text-[12px] text-[#404040] mb-16"
+          className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-4 text-[12px] text-[#404040] mb-16"
         >
           <span className="flex items-center gap-1.5">
             <CheckCircle2 size={12} className="text-[#22C55E]/50" />
             One-time setup
           </span>
-          <span className="w-1 h-1 rounded-full bg-[#262626]" />
+          <span className="hidden sm:block w-1 h-1 rounded-full bg-[#262626]" />
           <span className="flex items-center gap-1.5">
             <CheckCircle2 size={12} className="text-[#22C55E]/50" />
             Live in 7 days
           </span>
-          <span className="w-1 h-1 rounded-full bg-[#262626]" />
+          <span className="hidden sm:block w-1 h-1 rounded-full bg-[#262626]" />
           <span className="flex items-center gap-1.5">
             <CheckCircle2 size={12} className="text-[#22C55E]/50" />
             No monthly fees

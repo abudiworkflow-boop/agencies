@@ -150,7 +150,7 @@ export default function Pricing() {
               </div>
 
               {/* Table header */}
-              <div className="grid grid-cols-3 gap-4 px-6 py-3 bg-[#050505] border-b border-[#1A1A1A]">
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 px-4 sm:px-6 py-3 bg-[#050505] border-b border-[#1A1A1A]">
                 <span className="text-[10px] text-[#525252] uppercase tracking-wider font-medium" />
                 <span className="text-[10px] text-[#2563EB] uppercase tracking-wider font-medium text-center">
                   AbudiAuto
@@ -163,26 +163,26 @@ export default function Pricing() {
               {comparison.map((row) => (
                 <div
                   key={row.item}
-                  className="grid grid-cols-3 gap-4 px-6 py-3.5 border-b border-[#1A1A1A] last:border-0"
+                  className="grid grid-cols-3 gap-2 sm:gap-4 px-4 sm:px-6 py-3 border-b border-[#1A1A1A] last:border-0"
                 >
-                  <span className="text-[12px] text-[#737373]">{row.item}</span>
-                  <div className="flex items-center justify-center gap-1.5">
-                    <Check size={12} className="text-[#22C55E]" />
-                    <span className="text-[12px] text-[#22C55E] font-medium">{row.us}</span>
+                  <span className="text-[11px] sm:text-[12px] text-[#737373]">{row.item}</span>
+                  <div className="flex items-center justify-center gap-1">
+                    <Check size={11} className="text-[#22C55E] flex-shrink-0" />
+                    <span className="text-[10px] sm:text-[12px] text-[#22C55E] font-medium">{row.us}</span>
                   </div>
-                  <div className="flex items-center justify-center gap-1.5">
-                    <X size={12} className="text-[#EF4444]/50" />
-                    <span className="text-[12px] text-[#525252]">{row.them}</span>
+                  <div className="flex items-center justify-center gap-1">
+                    <X size={11} className="text-[#EF4444]/50 flex-shrink-0" />
+                    <span className="text-[10px] sm:text-[12px] text-[#525252]">{row.them}</span>
                   </div>
                 </div>
               ))}
 
               {/* Bottom summary */}
-              <div className="px-6 py-5 bg-[#050505]">
-                <div className="grid grid-cols-3 gap-4">
-                  <span className="text-[12px] font-semibold text-white">Total Year 1</span>
-                  <span className="text-[16px] font-bold text-[#22C55E] text-center">$700</span>
-                  <span className="text-[16px] font-bold text-[#EF4444]/60 text-center">$36,000+</span>
+              <div className="px-4 sm:px-6 py-5 bg-[#050505]">
+                <div className="grid grid-cols-3 gap-2 sm:gap-4">
+                  <span className="text-[11px] sm:text-[12px] font-semibold text-white">Total Year 1</span>
+                  <span className="text-[14px] sm:text-[16px] font-bold text-[#22C55E] text-center">$700</span>
+                  <span className="text-[14px] sm:text-[16px] font-bold text-[#EF4444]/60 text-center">$36,000+</span>
                 </div>
                 <p className="text-[11px] text-[#22C55E] mt-2 text-center">
                   Save $35,300+ in year one alone

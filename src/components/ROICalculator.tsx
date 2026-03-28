@@ -46,7 +46,7 @@ export default function ROICalculator() {
         >
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Left: Inputs */}
-            <div className="p-8 md:p-10 border-b lg:border-b-0 lg:border-r border-[#1A1A1A]">
+            <div className="p-5 sm:p-8 md:p-10 border-b lg:border-b-0 lg:border-r border-[#1A1A1A]">
               <div className="flex items-center gap-3 mb-8">
                 <div className="w-10 h-10 rounded-xl bg-[#2563EB]/10 border border-[#2563EB]/20 flex items-center justify-center">
                   <Calculator size={18} className="text-[#2563EB]" />
@@ -126,7 +126,7 @@ export default function ROICalculator() {
             </div>
 
             {/* Right: Results */}
-            <div className="p-8 md:p-10 flex flex-col justify-between">
+            <div className="p-5 sm:p-8 md:p-10 flex flex-col justify-between">
               <div>
                 <div className="flex items-center gap-3 mb-8">
                   <div className="w-10 h-10 rounded-xl bg-[#22C55E]/10 border border-[#22C55E]/20 flex items-center justify-center">
@@ -142,7 +142,7 @@ export default function ROICalculator() {
                   {/* Current revenue */}
                   <div className="rounded-xl bg-[#050505] border border-[#1A1A1A] p-5">
                     <div className="text-[11px] text-[#525252] uppercase tracking-wider mb-2">Without AI (current)</div>
-                    <div className="text-[28px] font-bold text-[#737373]">
+                    <div className="text-[22px] sm:text-[28px] font-bold text-[#737373]">
                       ${Math.round(currentRevenue).toLocaleString()}
                       <span className="text-[14px] font-normal text-[#404040]">/mo</span>
                     </div>
@@ -151,7 +151,7 @@ export default function ROICalculator() {
                   {/* AI revenue */}
                   <div className="rounded-xl bg-[#22C55E]/5 border border-[#22C55E]/20 p-5">
                     <div className="text-[11px] text-[#22C55E] uppercase tracking-wider mb-2">With AI System</div>
-                    <div className="text-[36px] font-bold text-[#22C55E]">
+                    <div className="text-[28px] sm:text-[36px] font-bold text-[#22C55E]">
                       ${Math.round(aiRevenue).toLocaleString()}
                       <span className="text-[14px] font-normal text-[#22C55E]/60">/mo</span>
                     </div>

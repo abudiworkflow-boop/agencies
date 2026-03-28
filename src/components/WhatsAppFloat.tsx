@@ -12,9 +12,9 @@ export default function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat on WhatsApp"
-      className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full bg-[#22C55E] hover:bg-[#16A34A] text-white flex items-center justify-center shadow-lg shadow-[#22C55E]/20 transition-all hover:scale-105"
+      className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-50 w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#22C55E] hover:bg-[#16A34A] text-white flex items-center justify-center shadow-lg shadow-[#22C55E]/20 transition-all hover:scale-105"
     >
-      <MessageCircle size={24} />
+      <MessageCircle size={22} className="sm:w-6 sm:h-6" />
     </a>
   );
 }

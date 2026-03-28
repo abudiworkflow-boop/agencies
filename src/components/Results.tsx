@@ -43,7 +43,7 @@ export default function Results() {
         {/* Comparison table */}
         <div className="rounded-2xl border border-[#1A1A1A] bg-[#0A0A0A] overflow-hidden mb-6">
           {/* Header */}
-          <div className="grid grid-cols-4 gap-4 px-6 py-4 border-b border-[#1A1A1A] bg-[#050505]">
+          <div className="hidden sm:grid grid-cols-4 gap-4 px-6 py-4 border-b border-[#1A1A1A] bg-[#050505]">
             <span className="text-[10px] text-[#525252] uppercase tracking-wider font-medium">Metric</span>
             <span className="text-[10px] text-[#EF4444]/70 uppercase tracking-wider font-medium">Before</span>
             <span className="text-[10px] text-[#22C55E]/70 uppercase tracking-wider font-medium">After</span>
@@ -56,12 +56,27 @@ export default function Results() {
               key={m.label}
               {...fadeUp}
               transition={{ delay: i * 0.04 }}
-              className="grid grid-cols-4 gap-4 px-6 py-4 border-b border-[#1A1A1A] last:border-0 hover:bg-[#050505] transition-colors"
+              className="border-b border-[#1A1A1A] last:border-0 hover:bg-[#050505] transition-colors px-5 sm:px-6 py-4"
             >
-              <span className="text-[13px] font-medium text-[#D4D4D4]">{m.label}</span>
-              <span className="text-[13px] text-[#EF4444]/60 line-through decoration-[#EF4444]/30">{m.before}</span>
-              <span className="text-[13px] font-semibold text-[#22C55E]">{m.after}</span>
-              <span className="text-[12px] text-[#A3A3A3] text-right">{m.impact}</span>
+              {/* Desktop */}
+              <div className="hidden sm:grid grid-cols-4 gap-4">
+                <span className="text-[13px] font-medium text-[#D4D4D4]">{m.label}</span>
+                <span className="text-[13px] text-[#EF4444]/60 line-through decoration-[#EF4444]/30">{m.before}</span>
+                <span className="text-[13px] font-semibold text-[#22C55E]">{m.after}</span>
+                <span className="text-[12px] text-[#A3A3A3] text-right">{m.impact}</span>
+              </div>
+              {/* Mobile */}
+              <div className="sm:hidden">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-[13px] font-medium text-[#D4D4D4]">{m.label}</span>
+                  <span className="text-[11px] text-[#A3A3A3]">{m.impact}</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <span className="text-[12px] text-[#EF4444]/60 line-through decoration-[#EF4444]/30">{m.before}</span>
+                  <span className="text-[12px] text-[#404040]">→</span>
+                  <span className="text-[12px] font-semibold text-[#22C55E]">{m.after}</span>
+                </div>
+              </div>
             </motion.div>
           ))}
         </div>

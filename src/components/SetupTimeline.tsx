@@ -83,7 +83,7 @@ export default function SetupTimeline() {
         {/* Timeline */}
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute left-[27px] md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px bg-gradient-to-b from-[#2563EB]/30 via-[#1A1A1A] to-[#1A1A1A]" />
+          <div className="absolute left-[19px] md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px bg-gradient-to-b from-[#2563EB]/30 via-[#1A1A1A] to-[#1A1A1A]" />
 
           <div className="space-y-6">
             {timeline.map((step, i) => {
@@ -99,7 +99,7 @@ export default function SetupTimeline() {
                   }`}
                 >
                   {/* Dot on timeline */}
-                  <div className="absolute left-[20px] md:left-1/2 md:-translate-x-1/2 z-10">
+                  <div className="absolute left-[12px] md:left-1/2 md:-translate-x-1/2 z-10">
                     <div
                       className="w-[15px] h-[15px] rounded-full border-2 bg-black"
                       style={{ borderColor: step.color }}
@@ -112,7 +112,7 @@ export default function SetupTimeline() {
                   </div>
 
                   {/* Spacer for mobile */}
-                  <div className="w-[55px] flex-shrink-0 md:hidden" />
+                  <div className="w-[40px] flex-shrink-0 md:hidden" />
 
                   {/* Content card */}
                   <div className={`flex-1 md:w-[calc(50%-40px)] ${isRight ? "md:mr-auto md:pr-10" : "md:ml-auto md:pl-10"}`}>

@@ -94,7 +94,7 @@ export default function Dashboard() {
                 <div className="w-2.5 h-2.5 rounded-full bg-[#EAB308]/50" />
                 <div className="w-2.5 h-2.5 rounded-full bg-[#22C55E]/50" />
               </div>
-              <span className="text-[11px] text-[#404040] font-mono ml-2">dashboard.abudiauto.com</span>
+              <span className="hidden sm:inline text-[11px] text-[#404040] font-mono ml-2">dashboard.abudiauto.com</span>
             </div>
             {/* Tab switcher */}
             <div className="flex gap-1 bg-[#0A0A0A] border border-[#1A1A1A] rounded-lg p-0.5">
@@ -149,26 +149,53 @@ export default function Dashboard() {
                 {leads.map((l, i) => (
                   <div
                     key={i}
-                    className="grid grid-cols-1 sm:grid-cols-[1fr_90px_100px_80px_50px_50px] gap-2 sm:gap-4 items-center px-4 py-3 border-b border-[#1A1A1A] last:border-0 hover:bg-[#111]/50 transition-colors"
+                    className="border-b border-[#1A1A1A] last:border-0 hover:bg-[#111]/50 transition-colors px-4 py-3"
                   >
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-7 h-7 rounded-full bg-[#111] border border-[#1A1A1A] flex items-center justify-center text-[10px] font-bold text-[#525252]">
-                        {l.name.split(" ").map((n) => n[0]).join("")}
+                    {/* Desktop row */}
+                    <div className="hidden sm:grid grid-cols-[1fr_90px_100px_80px_50px_50px] gap-4 items-center">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-full bg-[#111] border border-[#1A1A1A] flex items-center justify-center text-[10px] font-bold text-[#525252]">
+                          {l.name.split(" ").map((n) => n[0]).join("")}
+                        </div>
+                        <span className="text-[13px] font-medium text-[#D4D4D4]">{l.name}</span>
                       </div>
-                      <span className="text-[13px] font-medium text-[#D4D4D4]">{l.name}</span>
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: l.channelColor }} />
+                        <span className="text-[12px] text-[#737373]">{l.channel}</span>
+                      </div>
+                      <span className="text-[12px] text-[#737373]">{l.service}</span>
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold w-fit ${l.statusColor}`}>
+                        {l.status}
+                      </span>
+                      <span className={`text-[12px] font-bold text-center ${l.score >= 80 ? "text-[#22C55E]" : l.score >= 60 ? "text-[#EAB308]" : "text-[#525252]"}`}>
+                        {l.score}
+                      </span>
+                      <span className="text-[11px] text-[#404040] text-right">{l.time}</span>
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: l.channelColor }} />
-                      <span className="text-[12px] text-[#737373]">{l.channel}</span>
+                    {/* Mobile row */}
+                    <div className="sm:hidden">
+                      <div className="flex items-center justify-between mb-1.5">
+                        <div className="flex items-center gap-2">
+                          <div className="w-7 h-7 rounded-full bg-[#111] border border-[#1A1A1A] flex items-center justify-center text-[10px] font-bold text-[#525252]">
+                            {l.name.split(" ").map((n) => n[0]).join("")}
+                          </div>
+                          <span className="text-[13px] font-medium text-[#D4D4D4]">{l.name}</span>
+                        </div>
+                        <span className={`text-[13px] font-bold ${l.score >= 80 ? "text-[#22C55E]" : l.score >= 60 ? "text-[#EAB308]" : "text-[#525252]"}`}>
+                          {l.score}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-3 ml-9">
+                        <div className="flex items-center gap-1">
+                          <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: l.channelColor }} />
+                          <span className="text-[11px] text-[#737373]">{l.channel}</span>
+                        </div>
+                        <span className="text-[11px] text-[#404040]">{l.service}</span>
+                        <span className={`inline-flex items-center px-1.5 py-0.5 rounded text-[9px] font-semibold ${l.statusColor}`}>
+                          {l.status}
+                        </span>
+                      </div>
                     </div>
-                    <span className="text-[12px] text-[#737373]">{l.service}</span>
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-semibold w-fit ${l.statusColor}`}>
-                      {l.status}
-                    </span>
-                    <span className={`text-[12px] font-bold text-center ${l.score >= 80 ? "text-[#22C55E]" : l.score >= 60 ? "text-[#EAB308]" : "text-[#525252]"}`}>
-                      {l.score}
-                    </span>
-                    <span className="text-[11px] text-[#404040] text-right">{l.time}</span>
                   </div>
                 ))}
               </div>

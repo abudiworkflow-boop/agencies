@@ -88,29 +88,31 @@ const features = [
     desc: "Every lead automatically logged to Google Sheets with full conversation history, qualification data, and status.",
     span: "md:col-span-2",
     visual: (
-      <div className="mt-4 rounded-lg border border-[#1A1A1A] overflow-hidden">
-        <div className="grid grid-cols-5 gap-0 bg-[#050505] px-3 py-2 text-[10px] text-[#525252] font-medium uppercase tracking-wider border-b border-[#1A1A1A]">
-          <span>Name</span>
-          <span>Channel</span>
-          <span>Service</span>
-          <span>Score</span>
-          <span>Status</span>
-        </div>
-        {[
-          { name: "Sarah A.", ch: "WhatsApp", svc: "Social", score: 92, status: "Qualified" },
-          { name: "Omar K.", ch: "Instagram", svc: "Meta Ads", score: 78, status: "In Progress" },
-          { name: "Layla H.", ch: "Website", svc: "Full Suite", score: 88, status: "Qualified" },
-        ].map((r) => (
-          <div key={r.name} className="grid grid-cols-5 gap-0 px-3 py-2 text-[11px] border-b border-[#1A1A1A] last:border-0 bg-[#0A0A0A]">
-            <span className="text-[#D4D4D4] font-medium">{r.name}</span>
-            <span className="text-[#737373]">{r.ch}</span>
-            <span className="text-[#737373]">{r.svc}</span>
-            <span className={`font-bold ${r.score >= 80 ? "text-[#22C55E]" : "text-[#EAB308]"}`}>{r.score}</span>
-            <span className={`text-[10px] font-semibold ${r.status === "Qualified" ? "text-[#22C55E]" : "text-[#2563EB]"}`}>
-              {r.status}
-            </span>
+      <div className="mt-4 rounded-lg border border-[#1A1A1A] overflow-hidden overflow-x-auto">
+        <div className="min-w-[320px]">
+          <div className="grid grid-cols-5 gap-0 bg-[#050505] px-3 py-2 text-[9px] sm:text-[10px] text-[#525252] font-medium uppercase tracking-wider border-b border-[#1A1A1A]">
+            <span>Name</span>
+            <span>Channel</span>
+            <span>Service</span>
+            <span>Score</span>
+            <span>Status</span>
           </div>
-        ))}
+          {[
+            { name: "Sarah A.", ch: "WhatsApp", svc: "Social", score: 92, status: "Qualified" },
+            { name: "Omar K.", ch: "Instagram", svc: "Meta Ads", score: 78, status: "In Progress" },
+            { name: "Layla H.", ch: "Website", svc: "Full Suite", score: 88, status: "Qualified" },
+          ].map((r) => (
+            <div key={r.name} className="grid grid-cols-5 gap-0 px-3 py-2 text-[10px] sm:text-[11px] border-b border-[#1A1A1A] last:border-0 bg-[#0A0A0A]">
+              <span className="text-[#D4D4D4] font-medium">{r.name}</span>
+              <span className="text-[#737373]">{r.ch}</span>
+              <span className="text-[#737373]">{r.svc}</span>
+              <span className={`font-bold ${r.score >= 80 ? "text-[#22C55E]" : "text-[#EAB308]"}`}>{r.score}</span>
+              <span className={`text-[9px] sm:text-[10px] font-semibold ${r.status === "Qualified" ? "text-[#22C55E]" : "text-[#2563EB]"}`}>
+                {r.status}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
     ),
   },
