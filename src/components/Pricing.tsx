@@ -181,11 +181,11 @@ export default function Pricing() {
               <div className="px-6 py-5 bg-[#050505]">
                 <div className="grid grid-cols-3 gap-4">
                   <span className="text-[12px] font-semibold text-white">Total Year 1</span>
-                  <span className="text-[16px] font-bold text-[#22C55E] text-center">$1,000</span>
+                  <span className="text-[16px] font-bold text-[#22C55E] text-center">$700</span>
                   <span className="text-[16px] font-bold text-[#EF4444]/60 text-center">$36,000+</span>
                 </div>
                 <p className="text-[11px] text-[#22C55E] mt-2 text-center">
-                  Save $35,000+ in year one alone
+                  Save $35,300+ in year one alone
                 </p>
               </div>
             </div>

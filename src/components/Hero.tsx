@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   MessageSquare,
   Instagram,
@@ -12,6 +12,7 @@ import {
   Users,
   Zap,
   Shield,
+  Bell,
 } from "lucide-react";
 
 const channels = [
@@ -73,12 +74,99 @@ const socialProofStats = [
   { icon: Shield, value: 99, suffix: "%", label: "Uptime" },
 ];
 
+// Live notification toasts that simulate real activity
+const notifications = [
+  { name: "Nadia K.", channel: "WhatsApp", action: "New lead captured", color: "#22C55E", score: 91 },
+  { name: "Ahmed R.", channel: "Instagram", action: "Lead qualified", color: "#E1306C", score: 87 },
+  { name: "Khalid M.", channel: "Website", action: "Call booked", color: "#2563EB", score: 94 },
+  { name: "Sara T.", channel: "Gmail", action: "Follow-up sent", color: "#EA4335", score: 76 },
+  { name: "Omar J.", channel: "WhatsApp", action: "New lead captured", color: "#22C55E", score: 89 },
+];
+
+function LiveNotifications() {
+  const [current, setCurrent] = useState(-1);
+  const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+  const showNext = useCallback(() => {
+    setCurrent((prev) => {
+      const next = prev + 1;
+      return next >= notifications.length ? -1 : next;
+    });
+  }, []);
+
+  useEffect(() => {
+    const initial = setTimeout(() => {
+      showNext();
+    }, 2000);
+    return () => clearTimeout(initial);
+  }, [showNext]);
+
+  useEffect(() => {
+    if (current >= 0 && current < notifications.length) {
+      timerRef.current = setTimeout(showNext, 4500);
+      return () => clearTimeout(timerRef.current);
+    }
+  }, [current, showNext]);
+
+  return (
+    <div className="fixed top-20 right-4 z-40 pointer-events-none w-72 sm:w-80">
+      <AnimatePresence>
+        {current >= 0 && current < notifications.length && (
+          <motion.div
+            key={current}
+            initial={{ opacity: 0, y: 20, scale: 0.95, x: 20 }}
+            animate={{ opacity: 1, y: 0, scale: 1, x: 0 }}
+            exit={{ opacity: 0, y: -10, scale: 0.98 }}
+            transition={{ duration: 0.4, ease: "easeOut" }}
+            className="bg-[#0A0A0A]/95 backdrop-blur-xl border border-[#1A1A1A] rounded-xl p-3.5 shadow-2xl shadow-black/40"
+          >
+            <div className="flex items-start gap-3">
+              <div
+                className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                style={{ backgroundColor: `${notifications[current].color}15` }}
+              >
+                <Bell size={14} style={{ color: notifications[current].color }} />
+              </div>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[12px] font-semibold text-white truncate">
+                    {notifications[current].action}
+                  </span>
+                  <span className="text-[10px] font-bold text-[#22C55E] flex-shrink-0">
+                    {notifications[current].score}
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 mt-0.5">
+                  <span
+                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
+                    style={{ backgroundColor: notifications[current].color }}
+                  />
+                  <span className="text-[11px] text-[#737373] truncate">
+                    {notifications[current].name} via {notifications[current].channel}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
 export default function Hero() {
   return (
     <section className="relative pt-32 pb-20 px-6 overflow-hidden">
+      {/* Grid background */}
+      <div className="absolute inset-0 bg-grid opacity-50" />
+
       {/* Gradient orbs */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#2563EB]/[0.04] rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute top-40 -left-40 w-[400px] h-[400px] bg-[#22C55E]/[0.02] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] bg-[#2563EB]/[0.05] rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-40 -left-40 w-[400px] h-[400px] bg-[#22C55E]/[0.03] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-60 -right-20 w-[300px] h-[300px] bg-[#8B5CF6]/[0.03] rounded-full blur-[100px] pointer-events-none" />
+
+      {/* Live notifications */}
+      <LiveNotifications />
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Badge */}
@@ -109,7 +197,7 @@ export default function Hero() {
           <h1 className="text-[40px] sm:text-[56px] md:text-[72px] font-bold tracking-[-0.04em] leading-[1.05]">
             Stop losing leads.
             <br />
-            <span className="text-[#2563EB]">Start closing</span> them.
+            <span className="bg-gradient-to-r from-[#2563EB] to-[#8B5CF6] bg-clip-text text-transparent">Start closing</span> them.
           </h1>
         </motion.div>
 
@@ -133,9 +221,10 @@ export default function Hero() {
         >
           <a
             href="#cta"
-            className="inline-flex items-center gap-2 bg-white text-black text-[14px] font-semibold px-7 py-3.5 rounded-lg hover:bg-neutral-200 transition-colors"
+            className="group relative inline-flex items-center gap-2 bg-white text-black text-[14px] font-semibold px-7 py-3.5 rounded-lg hover:bg-neutral-100 transition-all hover:shadow-lg hover:shadow-white/10"
           >
-            Get Started — $700 <ArrowRight size={15} />
+            <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity" />
+            Get Started — $700 <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
           </a>
           <a
             href="#demo"
@@ -146,14 +235,27 @@ export default function Hero() {
         </motion.div>
 
         {/* Micro trust line */}
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="text-center text-[12px] text-[#404040] mb-16"
+          className="flex items-center justify-center gap-4 text-[12px] text-[#404040] mb-16"
         >
-          One-time setup. Live in 7 days. No monthly fees.
-        </motion.p>
+          <span className="flex items-center gap-1.5">
+            <CheckCircle2 size={12} className="text-[#22C55E]/50" />
+            One-time setup
+          </span>
+          <span className="w-1 h-1 rounded-full bg-[#262626]" />
+          <span className="flex items-center gap-1.5">
+            <CheckCircle2 size={12} className="text-[#22C55E]/50" />
+            Live in 7 days
+          </span>
+          <span className="w-1 h-1 rounded-full bg-[#262626]" />
+          <span className="flex items-center gap-1.5">
+            <CheckCircle2 size={12} className="text-[#22C55E]/50" />
+            No monthly fees
+          </span>
+        </motion.div>
 
         {/* Social proof stats bar */}
         <motion.div
@@ -183,68 +285,73 @@ export default function Hero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.5 }}
-          className="rounded-2xl border border-[#1A1A1A] bg-[#0A0A0A] overflow-hidden"
+          className="relative"
         >
-          {/* Browser chrome */}
-          <div className="flex items-center gap-2 px-5 py-3 border-b border-[#1A1A1A] bg-[#050505]">
-            <div className="flex gap-1.5">
-              <div className="w-2.5 h-2.5 rounded-full bg-[#EF4444]/50" />
-              <div className="w-2.5 h-2.5 rounded-full bg-[#EAB308]/50" />
-              <div className="w-2.5 h-2.5 rounded-full bg-[#22C55E]/50" />
-            </div>
-            <div className="flex-1 flex justify-center">
-              <div className="bg-[#111] rounded-md px-4 py-1 text-[11px] text-[#525252] font-mono">
-                automateai.dashboard
+          {/* Card glow */}
+          <div className="absolute -inset-1 bg-gradient-to-b from-[#2563EB]/10 via-transparent to-transparent rounded-2xl blur-xl pointer-events-none" />
+
+          <div className="relative rounded-2xl border border-[#1A1A1A] bg-[#0A0A0A] overflow-hidden">
+            {/* Browser chrome */}
+            <div className="flex items-center gap-2 px-5 py-3 border-b border-[#1A1A1A] bg-[#050505]">
+              <div className="flex gap-1.5">
+                <div className="w-2.5 h-2.5 rounded-full bg-[#EF4444]/50" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#EAB308]/50" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#22C55E]/50" />
+              </div>
+              <div className="flex-1 flex justify-center">
+                <div className="bg-[#111] rounded-md px-4 py-1 text-[11px] text-[#525252] font-mono">
+                  automateai.dashboard
+                </div>
               </div>
             </div>
-          </div>
 
-          {/* Dashboard preview */}
-          <div className="p-5">
-            {/* Channel cards */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
-              {channels.map((ch, i) => {
-                const Icon = ch.icon;
-                return (
+            {/* Dashboard preview */}
+            <div className="p-5">
+              {/* Channel cards */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
+                {channels.map((ch, i) => {
+                  const Icon = ch.icon;
+                  return (
+                    <motion.div
+                      key={ch.label}
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.7 + i * 0.08 }}
+                      className="rounded-xl border border-[#1A1A1A] bg-[#111] p-4 hover:border-[#262626] transition-all hover:bg-[#151515] group cursor-default"
+                    >
+                      <div
+                        className="w-8 h-8 rounded-lg flex items-center justify-center mb-3 transition-transform group-hover:scale-110"
+                        style={{ backgroundColor: `${ch.color}15` }}
+                      >
+                        <Icon size={16} style={{ color: ch.color }} />
+                      </div>
+                      <div className="text-[12px] text-[#737373] mb-0.5">{ch.label}</div>
+                      <div className="flex items-center gap-1.5">
+                        <CheckCircle2 size={12} className="text-[#22C55E]" />
+                        <span className="text-[11px] text-[#22C55E] font-medium">Connected</span>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Stats row */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {stats.map((s, i) => (
                   <motion.div
-                    key={ch.label}
+                    key={s.label}
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.7 + i * 0.08 }}
-                    className="rounded-xl border border-[#1A1A1A] bg-[#111] p-4 hover:border-[#262626] transition-colors"
+                    transition={{ delay: 1.0 + i * 0.08 }}
+                    className="rounded-xl border border-[#1A1A1A] bg-[#111] p-4"
                   >
-                    <div
-                      className="w-8 h-8 rounded-lg flex items-center justify-center mb-3"
-                      style={{ backgroundColor: `${ch.color}15` }}
-                    >
-                      <Icon size={16} style={{ color: ch.color }} />
+                    <div className="text-[24px] font-bold tracking-tight text-white mb-1">
+                      {s.value}
                     </div>
-                    <div className="text-[12px] text-[#737373] mb-0.5">{ch.label}</div>
-                    <div className="flex items-center gap-1.5">
-                      <CheckCircle2 size={12} className="text-[#22C55E]" />
-                      <span className="text-[11px] text-[#22C55E] font-medium">Connected</span>
-                    </div>
+                    <div className="text-[11px] text-[#525252]">{s.label}</div>
                   </motion.div>
-                );
-              })}
-            </div>
-
-            {/* Stats row */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              {stats.map((s, i) => (
-                <motion.div
-                  key={s.label}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.0 + i * 0.08 }}
-                  className="rounded-xl border border-[#1A1A1A] bg-[#111] p-4"
-                >
-                  <div className="text-[24px] font-bold tracking-tight text-white mb-1">
-                    {s.value}
-                  </div>
-                  <div className="text-[11px] text-[#525252]">{s.label}</div>
-                </motion.div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </motion.div>
