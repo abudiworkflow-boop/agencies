@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Zap } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import Image from "next/image";
 
 const links = [
   { label: "Features", href: "#features" },
@@ -33,9 +34,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-[#2563EB] flex items-center justify-center">
-            <Zap size={16} className="text-white fill-white" />
-          </div>
+          <Image src="/logo.png" alt="AbudiAuto" width={32} height={32} className="rounded-lg" />
           <span className="text-[15px] font-semibold text-white">AbudiAuto</span>
         </a>
 

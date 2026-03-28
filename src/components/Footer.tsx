@@ -1,6 +1,7 @@
 "use client";
 
-import { Zap, MessageCircle } from "lucide-react";
+import { MessageCircle } from "lucide-react";
+import Image from "next/image";
 
 const WHATSAPP_URL =
   "https://wa.me/966507120867?text=Hey%20I%20saw%20the%20AI%20Lead%20System%20demo%20and%20I%20want%20to%20get%20started";
@@ -11,9 +12,7 @@ export default function Footer() {
       <div className="max-w-6xl mx-auto flex flex-col gap-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <div className="w-5 h-5 rounded bg-[#2563EB] flex items-center justify-center">
-              <Zap size={10} className="text-white fill-white" />
-            </div>
+            <Image src="/logo.png" alt="AbudiAuto" width={20} height={20} className="rounded" />
             <span className="text-[12px] text-[#525252]">AbudiAuto</span>
           </div>
           <p className="text-[11px] text-[#404040] text-center">
