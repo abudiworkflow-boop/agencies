@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import {
   MessageSquare,
   Instagram,
@@ -12,7 +12,6 @@ import {
   Users,
   Zap,
   Shield,
-  Bell,
 } from "lucide-react";
 
 const channels = [
@@ -69,90 +68,10 @@ function AnimatedNumber({ target, suffix = "" }: { target: number; suffix?: stri
 }
 
 const socialProofStats = [
-  { icon: Users, value: 200, suffix: "+", label: "Businesses Automated" },
-  { icon: Zap, value: 47000, suffix: "+", label: "Leads Processed" },
-  { icon: Shield, value: 99, suffix: "%", label: "Uptime" },
+  { icon: Zap, value: 3, suffix: "s", label: "Avg Response Time" },
+  { icon: Users, value: 4, suffix: "", label: "Channels Connected" },
+  { icon: Shield, value: 24, suffix: "/7", label: "Always On" },
 ];
-
-// Live notification toasts that simulate real activity
-const notifications = [
-  { name: "Nadia K.", channel: "WhatsApp", action: "New lead captured", color: "#22C55E", score: 91 },
-  { name: "Ahmed R.", channel: "Instagram", action: "Lead qualified", color: "#E1306C", score: 87 },
-  { name: "Khalid M.", channel: "Website", action: "Call booked", color: "#2563EB", score: 94 },
-  { name: "Sara T.", channel: "Gmail", action: "Follow-up sent", color: "#EA4335", score: 76 },
-  { name: "Omar J.", channel: "WhatsApp", action: "New lead captured", color: "#22C55E", score: 89 },
-];
-
-function LiveNotifications() {
-  const [current, setCurrent] = useState(-1);
-  const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
-
-  const showNext = useCallback(() => {
-    setCurrent((prev) => {
-      const next = prev + 1;
-      return next >= notifications.length ? -1 : next;
-    });
-  }, []);
-
-  useEffect(() => {
-    const initial = setTimeout(() => {
-      showNext();
-    }, 2000);
-    return () => clearTimeout(initial);
-  }, [showNext]);
-
-  useEffect(() => {
-    if (current >= 0 && current < notifications.length) {
-      timerRef.current = setTimeout(showNext, 4500);
-      return () => clearTimeout(timerRef.current);
-    }
-  }, [current, showNext]);
-
-  return (
-    <div className="hidden sm:block fixed top-20 right-4 z-40 pointer-events-none w-72 sm:w-80">
-      <AnimatePresence>
-        {current >= 0 && current < notifications.length && (
-          <motion.div
-            key={current}
-            initial={{ opacity: 0, y: 20, scale: 0.95, x: 20 }}
-            animate={{ opacity: 1, y: 0, scale: 1, x: 0 }}
-            exit={{ opacity: 0, y: -10, scale: 0.98 }}
-            transition={{ duration: 0.4, ease: "easeOut" }}
-            className="bg-[#0A0A0A]/95 backdrop-blur-xl border border-[#1A1A1A] rounded-xl p-3.5 shadow-2xl shadow-black/40"
-          >
-            <div className="flex items-start gap-3">
-              <div
-                className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-                style={{ backgroundColor: `${notifications[current].color}15` }}
-              >
-                <Bell size={14} style={{ color: notifications[current].color }} />
-              </div>
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center justify-between gap-2">
-                  <span className="text-[12px] font-semibold text-white truncate">
-                    {notifications[current].action}
-                  </span>
-                  <span className="text-[10px] font-bold text-[#22C55E] flex-shrink-0">
-                    {notifications[current].score}
-                  </span>
-                </div>
-                <div className="flex items-center gap-1.5 mt-0.5">
-                  <span
-                    className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: notifications[current].color }}
-                  />
-                  <span className="text-[11px] text-[#737373] truncate">
-                    {notifications[current].name} via {notifications[current].channel}
-                  </span>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-}
 
 export default function Hero() {
   return (

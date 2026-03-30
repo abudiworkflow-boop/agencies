@@ -106,9 +106,8 @@ export default function Pricing() {
                     Get Started — $700
                   </a>
 
-                  {/* Guarantee */}
                   <p className="text-center text-[11px] text-[#525252] mt-4">
-                    30-day satisfaction guarantee. We&apos;ll rebuild it for free if it doesn&apos;t deliver.
+                    Includes 30 days of hands-on support after launch.
                   </p>
                 </div>
               </div>
@@ -132,7 +131,7 @@ export default function Pricing() {
                 <h3 className="text-[16px] font-semibold text-white mb-1">
                   AI System vs Hiring a Sales Rep
                 </h3>
-                <p className="text-[12px] text-[#525252]">Why businesses are switching</p>
+                <p className="text-[12px] text-[#525252]">Side by side</p>
               </div>
 
               {/* Table header */}

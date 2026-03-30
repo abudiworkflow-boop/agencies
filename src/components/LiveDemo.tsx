@@ -108,7 +108,7 @@ export default function LiveDemo() {
           viewport={{ once: true }}
           className="text-[14px] text-[#525252] mb-10 max-w-xl"
         >
-          This is a real AI conversation. Watch how it captures intent, qualifies the lead, scores them, and logs everything — all in under 3 minutes.
+          Watch the AI handle a full conversation — from first message to qualified lead in your CRM.
         </motion.p>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4">

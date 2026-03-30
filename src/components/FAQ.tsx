@@ -26,8 +26,8 @@ const faqs = [
     a: "Yes. The AI can converse in Arabic, English, French, and 90+ other languages — and it can switch mid-conversation if the customer switches. Perfect for businesses with diverse client bases.",
   },
   {
-    q: "$700 is a lot. Why not a monthly subscription?",
-    a: "Because we want you to own it, not rent it. A sales rep costs $2,000-4,000/month. A lead management tool costs $200-500/month. You're getting both for a one-time $700 — it pays for itself with your first 2-3 closed leads.",
+    q: "Why a one-time fee instead of monthly?",
+    a: "Because we want you to own it, not rent it. The system is yours — no recurring charges, no per-message fees, no surprise invoices. You pay once, it runs forever.",
   },
   {
     q: "What if it doesn't work for my business?",
