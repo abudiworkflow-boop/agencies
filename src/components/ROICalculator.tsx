@@ -32,9 +32,9 @@ export default function ROICalculator() {
             ROI Calculator
           </p>
           <h2 className="text-[32px] sm:text-[44px] font-bold tracking-[-0.03em] leading-tight text-white">
-            Do the math.
+            See the numbers.
             <br />
-            <span className="text-[#525252]">It pays for itself.</span>
+            <span className="text-[#525252]">For your business.</span>
           </h2>
         </motion.div>
 
@@ -182,7 +182,7 @@ export default function ROICalculator() {
                 href="#cta"
                 className="flex items-center justify-center gap-2 w-full bg-[#2563EB] hover:bg-[#1D4ED8] text-white text-[15px] font-semibold px-6 py-4 rounded-xl transition-colors mt-6"
               >
-                Get This ROI <ArrowRight size={16} />
+                Get Started <ArrowRight size={16} />
               </a>
             </div>
           </div>

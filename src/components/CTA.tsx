@@ -81,14 +81,6 @@ export default function CTA() {
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-[#2563EB]/[0.06] rounded-full blur-[120px] pointer-events-none" />
           <div className="absolute bottom-0 right-0 w-[300px] h-[300px] bg-[#22C55E]/[0.03] rounded-full blur-[100px] pointer-events-none" />
 
-          {/* Urgency bar */}
-          <div className="bg-[#2563EB]/10 border-b border-[#2563EB]/20 px-6 py-3 flex items-center justify-center gap-3">
-            <Clock size={14} className="text-[#2563EB]" />
-            <span className="text-[12px] font-medium text-[#93B4F5]">
-              Only 5 spots left for this month — systems go live within 7 days
-            </span>
-          </div>
-
           <div className="relative z-10 p-8 md:p-16">
             <AnimatePresence mode="wait">
               {submitted ? (
@@ -130,11 +122,10 @@ export default function CTA() {
                   {/* Header */}
                   <div className="text-center mb-10">
                     <h2 className="text-[32px] md:text-[48px] font-bold tracking-[-0.03em] leading-tight text-white mb-4">
-                      Ready to stop losing leads?
+                      Let&apos;s build your system.
                     </h2>
                     <p className="text-[15px] text-[#525252] max-w-lg mx-auto leading-relaxed">
-                      Fill in your details and we&apos;ll have your AI lead system live within 7 days.
-                      Your first qualified lead could come in within 24 hours of launch.
+                      Share your details and we&apos;ll reach out to discuss your setup. Your system goes live within 7 days.
                     </p>
                   </div>
 
@@ -225,7 +216,7 @@ export default function CTA() {
                           <Loader2 size={18} className="animate-spin" />
                         ) : (
                           <>
-                            Claim Your Spot — Get Started <ArrowRight size={16} />
+                            Get Started <ArrowRight size={16} />
                           </>
                         )}
                       </button>

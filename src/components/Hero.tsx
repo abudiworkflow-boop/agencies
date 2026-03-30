@@ -165,8 +165,6 @@ export default function Hero() {
       <div className="absolute top-40 -left-40 w-[400px] h-[400px] bg-[#22C55E]/[0.03] rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute top-60 -right-20 w-[300px] h-[300px] bg-[#8B5CF6]/[0.03] rounded-full blur-[100px] pointer-events-none" />
 
-      {/* Live notifications */}
-      <LiveNotifications />
 
       <div className="max-w-6xl mx-auto relative z-10">
         {/* Badge */}
@@ -195,9 +193,9 @@ export default function Hero() {
           className="text-center max-w-4xl mx-auto mb-6"
         >
           <h1 className="text-[40px] sm:text-[56px] md:text-[72px] font-bold tracking-[-0.04em] leading-[1.05]">
-            Stop losing leads.
+            AI that turns
             <br />
-            <span className="bg-gradient-to-r from-[#2563EB] to-[#8B5CF6] bg-clip-text text-transparent">Start closing</span> them.
+            <span className="bg-gradient-to-r from-[#2563EB] to-[#8B5CF6] bg-clip-text text-transparent">conversations</span> into clients.
           </h1>
         </motion.div>
 
@@ -224,7 +222,7 @@ export default function Hero() {
             className="group relative inline-flex items-center gap-2 bg-white text-black text-[14px] font-semibold px-7 py-3.5 rounded-lg hover:bg-neutral-100 transition-all hover:shadow-lg hover:shadow-white/10"
           >
             <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-white/0 via-white/20 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity" />
-            Get Started — $700 <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
+            Get Started <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
           </a>
           <a
             href="#demo"

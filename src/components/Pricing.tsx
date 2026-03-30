@@ -28,7 +28,6 @@ const comparison = [
   { item: "Available", us: "24/7/365", them: "Business hours only" },
   { item: "Languages", us: "90+ languages", them: "1-2 languages" },
   { item: "Cost/month", us: "$0 (one-time)", them: "$2,000-4,000" },
-  { item: "Sick days", us: "Never", them: "Yes" },
   { item: "Consistency", us: "100%", them: "Varies" },
 ];
 
@@ -68,19 +67,6 @@ export default function Pricing() {
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-[#2563EB]/[0.06] rounded-full blur-[80px] pointer-events-none" />
 
                 <div className="relative z-10">
-                  {/* Urgency badge */}
-                  <div className="flex justify-center mb-6">
-                    <div className="inline-flex items-center gap-2 bg-[#EAB308]/10 border border-[#EAB308]/20 rounded-full px-4 py-1.5">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#EAB308] opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-[#EAB308]" />
-                      </span>
-                      <span className="text-[12px] font-medium text-[#EAB308]">
-                        Only 5 spots left this month
-                      </span>
-                    </div>
-                  </div>
-
                   {/* Title */}
                   <div className="text-center mb-8">
                     <p className="text-[13px] font-medium text-[#2563EB] uppercase tracking-wider mb-3">
@@ -184,21 +170,16 @@ export default function Pricing() {
                   <span className="text-[14px] sm:text-[16px] font-bold text-[#22C55E] text-center">$700</span>
                   <span className="text-[14px] sm:text-[16px] font-bold text-[#EF4444]/60 text-center">$36,000+</span>
                 </div>
-                <p className="text-[11px] text-[#22C55E] mt-2 text-center">
-                  Save $35,300+ in year one alone
+                <p className="text-[11px] text-[#525252] mt-2 text-center">
+                  Based on average sales rep salary
                 </p>
               </div>
             </div>
 
-            {/* ROI callout */}
-            <div className="mt-4 rounded-2xl border border-[#22C55E]/10 bg-[#22C55E]/5 p-5 text-center">
-              <p className="text-[14px] text-[#22C55E] font-semibold mb-1">
-                Average ROI: 12x in 90 days
-              </p>
-              <p className="text-[12px] text-[#525252]">
-                Most clients recoup their investment within the first 2-3 closed leads.
-              </p>
-            </div>
+            {/* Note */}
+            <p className="mt-4 text-[12px] text-[#525252] text-center">
+              Most clients recoup their investment within the first few closed leads.
+            </p>
           </motion.div>
         </div>
       </div>
