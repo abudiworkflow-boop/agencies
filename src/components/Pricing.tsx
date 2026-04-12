@@ -106,8 +106,11 @@ export default function Pricing() {
                     Get Started — $700
                   </a>
 
-                  <p className="text-center text-[11px] text-[#525252] mt-4">
-                    Includes 30 days of hands-on support after launch.
+                  <p className="text-center text-[12px] text-[#525252] mt-4">
+                    3 businesses running this system right now.
+                  </p>
+                  <p className="text-center text-[11px] text-[#404040] mt-1">
+                    30-day satisfaction guarantee — if it doesn&apos;t work, you don&apos;t pay.
                   </p>
                 </div>
               </div>

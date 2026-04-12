@@ -17,9 +17,9 @@ const script: Msg[] = [
   { id: 3, from: "user", text: "Both actually. We just opened a second location and need to get the word out fast.", time: "10:33 AM" },
   { id: 4, from: "ai", text: "Congratulations on the expansion! For a new location launch, we typically run targeted Instagram/Facebook ads plus Google Ads for search. What's your approximate monthly marketing budget?", time: "10:33 AM" },
   { id: 5, from: "user", text: "We're thinking around $2,000-3,000 per month.", time: "10:34 AM" },
-  { id: 6, from: "ai", text: "That's a solid budget for a dual-platform strategy. How soon do you need campaigns running? I'd love to book a strategy call with our team.", time: "10:34 AM" },
+  { id: 6, from: "ai", text: "That's a solid budget for a dual-platform strategy. How soon do you need campaigns running?", time: "10:34 AM" },
   { id: 7, from: "user", text: "As soon as possible! We open in 3 weeks.", time: "10:35 AM" },
-  { id: 8, from: "ai", text: "We can have campaigns live before opening day. Let me set up a call — could you share your name and the best way to reach you?", time: "10:35 AM" },
+  { id: 8, from: "ai", text: "Perfect. I've flagged you as a priority lead. Our team will reach out within the hour to book your strategy call. Talk soon!", time: "10:35 AM" },
 ];
 
 const quals = [
@@ -27,7 +27,8 @@ const quals = [
   { key: "interest", label: "Service", value: "Social Media + Ads", at: 2 },
   { key: "budget", label: "Budget", value: "$2,000 – $3,000/mo", at: 5 },
   { key: "timeline", label: "Timeline", value: "3 weeks (urgent)", at: 7 },
-  { key: "score", label: "Lead Score", value: "92 / 100", at: 8 },
+  { key: "score", label: "Lead Score", value: "94 — Hot", at: 8 },
+  { key: "status", label: "Status", value: "Qualified — Sent to CRM", at: 8 },
 ];
 
 export default function LiveDemo() {
@@ -46,7 +47,6 @@ export default function LiveDemo() {
     setPlaying(true);
   }, []);
 
-  // Auto-play when scrolled into view
   useEffect(() => {
     if (autoStarted) return;
     const observer = new IntersectionObserver(
@@ -84,7 +84,7 @@ export default function LiveDemo() {
   const msgCount = msgs.length;
 
   return (
-    <section id="demo" className="py-24 px-6" ref={sectionRef}>
+    <section id="demo" className="py-20 sm:py-24 px-6" ref={sectionRef}>
       <div className="max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 16 }}
@@ -95,7 +95,7 @@ export default function LiveDemo() {
           <p className="text-[12px] font-medium text-[#2563EB] uppercase tracking-wider mb-3">
             Live demo
           </p>
-          <h2 className="text-[32px] sm:text-[44px] font-bold tracking-[-0.03em] leading-tight text-white">
+          <h2 className="text-[28px] sm:text-[40px] font-bold tracking-[-0.03em] leading-tight text-white">
             See it work.
             <br />
             <span className="text-[#525252]">In real time.</span>
@@ -111,7 +111,7 @@ export default function LiveDemo() {
           Watch the AI handle a full conversation — from first message to qualified lead in your CRM.
         </motion.p>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-4">
           {/* Chat window */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -119,8 +119,7 @@ export default function LiveDemo() {
             viewport={{ once: true }}
             className="rounded-2xl border border-[#1A1A1A] bg-[#0A0A0A] overflow-hidden flex flex-col"
           >
-            {/* Chat header */}
-            <div className="flex items-center justify-between px-5 py-3 border-b border-[#1A1A1A]">
+            <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-b border-[#1A1A1A]">
               <div className="flex items-center gap-3">
                 <div className="relative">
                   <div className="w-9 h-9 rounded-full bg-[#2563EB] flex items-center justify-center">
@@ -130,7 +129,7 @@ export default function LiveDemo() {
                 </div>
                 <div>
                   <div className="text-[13px] font-semibold text-white">AI Agent</div>
-                  <div className="text-[11px] text-[#22C55E]">Online — WhatsApp</div>
+                  <div className="text-[11px] text-[#22C55E]">Online — Instagram DM</div>
                 </div>
               </div>
               <button
@@ -149,16 +148,15 @@ export default function LiveDemo() {
               </button>
             </div>
 
-            {/* Messages */}
-            <div ref={chatRef} className="flex-1 min-h-[420px] max-h-[520px] overflow-y-auto p-5 space-y-3">
+            <div ref={chatRef} className="flex-1 min-h-[380px] max-h-[480px] overflow-y-auto p-4 sm:p-5 space-y-3">
               {msgs.length === 0 && !playing && (
                 <div className="h-full flex items-center justify-center">
                   <div className="text-center">
-                    <div className="w-16 h-16 rounded-2xl bg-[#111] border border-[#1A1A1A] flex items-center justify-center mx-auto mb-4">
-                      <Play size={24} className="text-[#404040]" />
+                    <div className="w-14 h-14 rounded-2xl bg-[#111] border border-[#1A1A1A] flex items-center justify-center mx-auto mb-4">
+                      <Play size={22} className="text-[#404040]" />
                     </div>
-                    <p className="text-[14px] text-[#404040] mb-1">Press Start to begin</p>
-                    <p className="text-[12px] text-[#262626]">Watch the AI handle a real conversation</p>
+                    <p className="text-[13px] text-[#404040] mb-1">Press Start to begin</p>
+                    <p className="text-[11px] text-[#262626]">Watch the AI handle a live conversation</p>
                   </div>
                 </div>
               )}
@@ -183,7 +181,7 @@ export default function LiveDemo() {
                         <User size={13} className="text-[#A3A3A3]" />
                       )}
                     </div>
-                    <div className="max-w-[78%]">
+                    <div className="max-w-[80%]">
                       <div
                         className={`px-3.5 py-2.5 rounded-2xl text-[13px] leading-relaxed ${
                           m.from === "user"
@@ -202,7 +200,6 @@ export default function LiveDemo() {
                 ))}
               </AnimatePresence>
 
-              {/* Typing indicator */}
               {playing && idx < script.length && (
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -234,17 +231,16 @@ export default function LiveDemo() {
               )}
             </div>
 
-            {/* Post-demo CTA bar */}
             <AnimatePresence>
               {done && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
                   animate={{ opacity: 1, height: "auto" }}
-                  className="border-t border-[#1A1A1A] bg-[#050505] px-5 py-4"
+                  className="border-t border-[#1A1A1A] bg-[#050505] px-4 sm:px-5 py-4"
                 >
                   <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
                     <p className="text-[13px] text-[#737373]">
-                      That&apos;s your AI handling a lead from first message to CRM. <span className="text-white font-medium">Want this for your business?</span>
+                      Full conversation handled. Lead qualified and logged.
                     </p>
                     <a
                       href="#cta"
@@ -266,7 +262,7 @@ export default function LiveDemo() {
             transition={{ delay: 0.1 }}
             className="rounded-2xl border border-[#1A1A1A] bg-[#0A0A0A] p-5 flex flex-col"
           >
-            <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center justify-between mb-5">
               <div>
                 <div className="text-[14px] font-semibold text-white">AI Extraction</div>
                 <div className="text-[11px] text-[#525252]">Real-time qualification</div>
@@ -279,7 +275,7 @@ export default function LiveDemo() {
               )}
             </div>
 
-            <div className="space-y-2.5 flex-1">
+            <div className="space-y-2 flex-1">
               {quals.map((q) => {
                 const active = msgCount >= q.at;
                 return (
@@ -291,7 +287,9 @@ export default function LiveDemo() {
                       active
                         ? q.key === "score"
                           ? "border-[#22C55E]/30 bg-[#22C55E]/5"
-                          : "border-[#1A1A1A] bg-[#111]"
+                          : q.key === "status"
+                            ? "border-[#2563EB]/30 bg-[#2563EB]/5"
+                            : "border-[#1A1A1A] bg-[#111]"
                         : "border-[#111] bg-[#050505]"
                     }`}
                   >
@@ -301,34 +299,32 @@ export default function LiveDemo() {
                         active
                           ? q.key === "score"
                             ? "text-[#22C55E]"
-                            : "text-[#D4D4D4]"
+                            : q.key === "status"
+                              ? "text-[#93B4F5]"
+                              : "text-[#D4D4D4]"
                           : "text-[#262626]"
                       }`}
                     >
-                      {active ? q.value : "—"}
+                      {active ? q.value : "\u2014"}
                     </div>
                   </motion.div>
                 );
               })}
             </div>
 
-            {/* CRM saved indicator */}
             <AnimatePresence>
               {done && (
                 <motion.div
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="mt-4 rounded-xl border border-[#2563EB]/20 bg-[#2563EB]/5 px-4 py-3"
+                  className="mt-3 rounded-xl border border-[#22C55E]/20 bg-[#22C55E]/5 px-4 py-3"
                 >
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#2563EB]" />
-                    <span className="text-[11px] font-semibold text-[#93B4F5]">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-[#22C55E]" />
+                    <span className="text-[12px] font-semibold text-[#22C55E]">
                       Saved to CRM
                     </span>
                   </div>
-                  <p className="text-[10px] text-[#525252]">
-                    Lead logged automatically with full history
-                  </p>
                 </motion.div>
               )}
             </AnimatePresence>

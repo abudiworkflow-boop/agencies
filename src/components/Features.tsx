@@ -8,21 +8,22 @@ import {
   BarChart3,
   Clock,
   Sparkles,
+  CheckCircle2,
 } from "lucide-react";
 
 const features = [
   {
     icon: MessageSquare,
     title: "Multi-Channel Capture",
-    desc: "WhatsApp, Instagram DMs, Gmail, and website forms — all funneled into one AI agent. Zero missed leads.",
+    desc: "WhatsApp, Instagram DMs, Gmail, and website forms — all funneled into one AI agent.",
     span: "md:col-span-2",
     visual: (
       <div className="mt-4 grid grid-cols-2 gap-2">
         {[
-          { name: "WhatsApp", leads: 342, color: "#22C55E" },
-          { name: "Instagram", leads: 218, color: "#E1306C" },
-          { name: "Gmail", leads: 156, color: "#EA4335" },
-          { name: "Website", leads: 89, color: "#2563EB" },
+          { name: "WhatsApp", color: "#22C55E" },
+          { name: "Instagram", color: "#E1306C" },
+          { name: "Gmail", color: "#EA4335" },
+          { name: "Website", color: "#2563EB" },
         ].map((ch) => (
           <div key={ch.name} className="rounded-lg bg-[#111] border border-[#1A1A1A] p-3">
             <div className="flex items-center justify-between mb-2">
@@ -32,8 +33,10 @@ const features = [
                 style={{ backgroundColor: ch.color }}
               />
             </div>
-            <span className="text-[18px] font-bold text-white">{ch.leads}</span>
-            <span className="text-[10px] text-[#525252] ml-1">leads</span>
+            <div className="flex items-center gap-1.5">
+              <CheckCircle2 size={12} className="text-[#22C55E]" />
+              <span className="text-[11px] text-[#22C55E] font-medium">Connected</span>
+            </div>
           </div>
         ))}
       </div>
@@ -42,17 +45,17 @@ const features = [
   {
     icon: Brain,
     title: "AI Response Engine",
-    desc: "AI answers in under 3 seconds, maintaining context across the entire conversation.",
+    desc: "Responds in under 3 seconds with full context awareness across the conversation.",
     span: "",
     visual: (
       <div className="mt-4 space-y-2">
         <div className="rounded-lg bg-[#111] border border-[#1A1A1A] p-3">
           <div className="text-[11px] text-[#525252] mb-1">Customer</div>
-          <div className="text-[12px] text-[#A3A3A3]">"I need help with social media..."</div>
+          <div className="text-[12px] text-[#A3A3A3]">&ldquo;I need help with social media...&rdquo;</div>
         </div>
         <div className="rounded-lg bg-[#2563EB]/10 border border-[#2563EB]/20 p-3">
-          <div className="text-[11px] text-[#2563EB] mb-1">AI Agent • 2.1s</div>
-          <div className="text-[12px] text-[#93B4F5]">"I'd love to help! Are you looking for organic growth or paid ads?"</div>
+          <div className="text-[11px] text-[#2563EB] mb-1">AI Agent &middot; 2.1s</div>
+          <div className="text-[12px] text-[#93B4F5]">&ldquo;I&apos;d love to help! Are you looking for organic growth or paid ads?&rdquo;</div>
         </div>
       </div>
     ),
@@ -60,7 +63,7 @@ const features = [
   {
     icon: Target,
     title: "Lead Qualification",
-    desc: "AI scores every lead based on budget, timeline, service fit, and engagement quality.",
+    desc: "Every lead scored on budget, timeline, service fit, and engagement quality.",
     span: "",
     visual: (
       <div className="mt-4 space-y-2">
@@ -85,22 +88,22 @@ const features = [
   {
     icon: BarChart3,
     title: "CRM Integration",
-    desc: "Every lead automatically logged to Google Sheets with full conversation history, qualification data, and status.",
+    desc: "Every lead logged to your CRM with full conversation history and qualification data.",
     span: "md:col-span-2",
     visual: (
       <div className="mt-4 rounded-lg border border-[#1A1A1A] overflow-hidden overflow-x-auto">
-        <div className="min-w-[320px]">
+        <div className="min-w-[300px]">
           <div className="grid grid-cols-5 gap-0 bg-[#050505] px-3 py-2 text-[9px] sm:text-[10px] text-[#525252] font-medium uppercase tracking-wider border-b border-[#1A1A1A]">
-            <span>Name</span>
+            <span>Lead</span>
             <span>Channel</span>
             <span>Service</span>
             <span>Score</span>
             <span>Status</span>
           </div>
           {[
-            { name: "Sarah A.", ch: "WhatsApp", svc: "Social", score: 92, status: "Qualified" },
-            { name: "Omar K.", ch: "Instagram", svc: "Meta Ads", score: 78, status: "In Progress" },
-            { name: "Layla H.", ch: "Website", svc: "Full Suite", score: 88, status: "Qualified" },
+            { name: "Lead #1", ch: "WhatsApp", svc: "Social", score: 92, status: "Qualified" },
+            { name: "Lead #2", ch: "Instagram", svc: "Meta Ads", score: 78, status: "In Progress" },
+            { name: "Lead #3", ch: "Website", svc: "Full Suite", score: 88, status: "Qualified" },
           ].map((r) => (
             <div key={r.name} className="grid grid-cols-5 gap-0 px-3 py-2 text-[10px] sm:text-[11px] border-b border-[#1A1A1A] last:border-0 bg-[#0A0A0A]">
               <span className="text-[#D4D4D4] font-medium">{r.name}</span>
@@ -119,7 +122,7 @@ const features = [
   {
     icon: Clock,
     title: "Smart Follow-ups",
-    desc: "Automated nurture sequences for leads that don't convert immediately. Day 1, 3, 7 touchpoints.",
+    desc: "Automated nurture sequences for leads that don't convert immediately.",
     span: "",
     visual: (
       <div className="mt-4 space-y-2">
@@ -140,12 +143,12 @@ const features = [
   {
     icon: Sparkles,
     title: "AI Ad Copy",
-    desc: "Generate Meta & Google ad copy instantly with AI-optimized headlines, descriptions, and CTAs.",
+    desc: "Generate Meta & Google ad copy instantly with optimized headlines and CTAs.",
     span: "",
     visual: (
       <div className="mt-4 rounded-lg bg-[#111] border border-[#1A1A1A] p-3">
         <div className="text-[10px] text-[#2563EB] font-medium mb-2 uppercase tracking-wider">Generated Copy</div>
-        <div className="text-[12px] text-[#D4D4D4] font-medium mb-1">"Struggling with leads?"</div>
+        <div className="text-[12px] text-[#D4D4D4] font-medium mb-1">&ldquo;Struggling with leads?&rdquo;</div>
         <div className="text-[11px] text-[#737373] leading-relaxed">
           Our AI captures & qualifies every lead 24/7. Book a free strategy call today.
         </div>
@@ -166,14 +169,14 @@ const fadeUp = {
 
 export default function Features() {
   return (
-    <section id="features" className="py-24 px-6">
+    <section id="features" className="py-20 sm:py-24 px-6">
       <div className="max-w-6xl mx-auto">
-        <motion.div {...fadeUp} className="mb-14">
+        <motion.div {...fadeUp} className="mb-12">
           <p className="text-[12px] font-medium text-[#2563EB] uppercase tracking-wider mb-3">
-            What it does
+            The system
           </p>
-          <h2 className="text-[32px] sm:text-[44px] font-bold tracking-[-0.03em] leading-tight text-white">
-            Six modules.
+          <h2 className="text-[28px] sm:text-[40px] font-bold tracking-[-0.03em] leading-tight text-white">
+            Everything it does.
             <br />
             <span className="text-[#525252]">One system.</span>
           </h2>

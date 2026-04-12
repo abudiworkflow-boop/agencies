@@ -4,7 +4,7 @@ import { MessageCircle } from "lucide-react";
 import Image from "next/image";
 
 const WHATSAPP_URL =
-  "https://wa.me/966507120867?text=Hey%20I%20saw%20the%20AI%20Lead%20System%20demo%20and%20I%20want%20to%20get%20started";
+  "https://wa.me/966507120867?text=Hey%20I%20saw%20the%20AI%20Lead%20System%20and%20I%20want%20to%20get%20started";
 
 export default function Footer() {
   return (
@@ -13,11 +13,9 @@ export default function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Image src="/logo.png" alt="AbudiAuto" width={20} height={20} className="rounded" />
-            <span className="text-[12px] text-[#525252]">AbudiAuto</span>
+            <span className="text-[12px] text-[#A3A3A3] font-medium">AbudiAuto</span>
+            <span className="text-[11px] text-[#404040]">&middot; Jeddah, Saudi Arabia</span>
           </div>
-          <p className="text-[11px] text-[#404040] text-center">
-            Enterprise-grade AI infrastructure. Built for your business.
-          </p>
           <a
             href={WHATSAPP_URL}
             target="_blank"
@@ -30,7 +28,7 @@ export default function Footer() {
         </div>
         <div className="text-center">
           <p className="text-[10px] text-[#404040]">
-            &copy; 2026 AbudiAuto. All rights reserved.
+            Built by AbudiAuto &middot; &copy; 2026. All rights reserved.
           </p>
         </div>
       </div>

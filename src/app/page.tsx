@@ -4,6 +4,8 @@ import Integrations from "@/components/Integrations";
 import HowItWorks from "@/components/HowItWorks";
 import Features from "@/components/Features";
 import LiveDemo from "@/components/LiveDemo";
+import VideoSection from "@/components/VideoSection";
+import Results from "@/components/Results";
 import Pricing from "@/components/Pricing";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
@@ -18,6 +20,8 @@ export default function Home() {
       <HowItWorks />
       <Features />
       <LiveDemo />
+      <VideoSection />
+      <Results />
       <Pricing />
       <CTA />
       <Footer />
